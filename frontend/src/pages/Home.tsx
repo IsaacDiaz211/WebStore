@@ -1,3 +1,4 @@
+import { Container, Row, Col } from "react-bootstrap";
 import CarouselWelcome from "../components/CarouselWelcome.tsx";
 import CategoryCard from "../components/CategoryCard.tsx";
 
@@ -38,7 +39,14 @@ const Home = () => {
     ];
     return (
         <>
-            <CarouselWelcome images={carouselImages}/>
+            <Container fluid className="m-0 p-0">
+                <Row className="m-0">
+                    <Col md={11} className="p-0">
+                        <CarouselWelcome images={carouselImages}/>
+                    </Col>
+                </Row>
+            </Container>
+
 
             <h1>Nuestras categorias</h1>
 

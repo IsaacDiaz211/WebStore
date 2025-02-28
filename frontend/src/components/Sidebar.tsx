@@ -14,7 +14,8 @@ const SideBar = () => {
     return (
         <div
             className="d-flex flex-column position-fixed top-0 end-0 h-100 p-3"
-            style={{ width: "200px", backgroundColor: '#3498db' }} /*cambiar aquí el color*/
+            style={{ width: "170px", backgroundColor: '#3498db' }} /*cambiar aquí el color*/
+            //style={{ backgroundColor: '#3498db' }}
         >
             {/* Logo arriba */}
             <div className="text-center mb-auto text-black">
