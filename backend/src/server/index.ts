@@ -2,7 +2,8 @@ import express, {Express, Response} from "express";
 import cors from 'cors';
 import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express';
-import routes from '../routes'
+import routes from '../routes';
+import { connectToDatabase } from '../config/db';
 import * as process from "node:process";
 import swaggerJSDoc from 'swagger-jsdoc';
 
@@ -61,5 +62,14 @@ server.use(express.json({limit: "50mb"}));
 server.get('/', (req, res) => {
     res.redirect('/api');
 })
+
+// Conectar a la base de datos
+connectToDatabase().then(client => {
+    // Aquí puedes usar `client` para interactuar con la base de datos
+
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+});
 
 export default server;
