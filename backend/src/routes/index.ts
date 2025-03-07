@@ -3,7 +3,7 @@
  * Redirections to Routers
  */
 
-import express, {Request, Response} from "express";
+import express from "express";
 import  helloRouter from  './HelloRouter';
 import {LogInfo} from "../utils/logger";
 

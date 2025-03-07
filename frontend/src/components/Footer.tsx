@@ -27,7 +27,7 @@ const Footer = () => {
                         <Link to="/quienes-somos" className="footer-link">Sobre nosotros</Link>
                         <br />
                         <br />
-                        <Link to="/perfil" className="footer-link">Perfil</Link>
+                        <Link to="/iniciar-sesion" className="footer-link">Perfil</Link>
                     </Col>
 
                     {/* Tercera columna */}
