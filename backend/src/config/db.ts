@@ -1,5 +1,7 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+import { MongoClient, ServerApiVersion } from 'mongodb';
+
 const uri = "mongodb+srv://isaacmd:HS7BMoMZwNNXgfyf@clusterprojects.qgx92.mongodb.net/?retryWrites=true&w=majority&appName=ClusterProjects";
+
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
     serverApi: {
@@ -8,7 +10,8 @@ const client = new MongoClient(uri, {
         deprecationErrors: true,
     }
 });
-async function run() {
+
+export async function connectToDatabase() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
@@ -20,4 +23,4 @@ async function run() {
         await client.close();
     }
 }
-run().catch(console.dir);
+//run().catch(console.dir);
