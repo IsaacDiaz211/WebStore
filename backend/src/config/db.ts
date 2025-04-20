@@ -1,3 +1,4 @@
+/* Version con mongodb basada en ChatGPT
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
 const uri = "mongodb+srv://isaacmd:HS7BMoMZwNNXgfyf@clusterprojects.qgx92.mongodb.net/?retryWrites=true&w=majority&appName=ClusterProjects";
@@ -22,5 +23,19 @@ export async function connectToDatabase() {
         // Ensures that the client will close when you finish/error
         await client.close();
     }
-}
-//run().catch(console.dir);
+}*/
+
+import mongoose from 'mongoose';
+import 'dotenv/config'; // Carga las variables de entorno
+
+const uri = "mongodb+srv://isaacmd:HS7BMoMZwNNXgfyf@clusterprojects.qgx92.mongodb.net/?retryWrites=true&w=majority&appName=ClusterProjects";
+
+export const connectDB = async () => {
+  try {
+    await mongoose.connect(uri);
+    console.log('✅ MongoDB connected');
+  } catch (error) {
+    console.error('❌ Error connecting to MongoDB:', error);
+    process.exit(1);
+  }
+};
