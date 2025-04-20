@@ -3,7 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express';
 import routes from '../routes';
-import { connectToDatabase } from '../config/db';
+import { connectDB } from '../config/db';
 //import * as process from "node:process";
 //import swaggerJSDoc from 'swagger-jsdoc';
 
@@ -45,7 +45,7 @@ server.get('/', (req, res) => {
     res.redirect('/api');
 })
 
-// Conectar a la base de datos
-connectToDatabase();
+// Conectar a la base de datos que se encuentra en config/db.ts
+connectDB();
 
 export default server;
