@@ -7,7 +7,7 @@ import InfoProduct from "./pages/InfoProduct.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
 import Cart from "./pages/Cart.tsx";
 import Consultation from "./pages/Consultation.tsx";
-import Profile from "./pages/Profile.tsx";
+import Login from "./pages/LogIn.tsx";
 import SignIn from "./pages/SignIn.tsx";
 import LogIn from "./pages/LogIn.tsx";	
 import Footer from "./components/Footer";
@@ -24,7 +24,7 @@ function App() {
                   <Route path="/catalogo" element={<Catalogue />} />
                   <Route path="/consultas" element={<Consultation />} />
                   <Route path="/carrito" element={<Cart />} />
-                  <Route path="/perfil" element={<Profile />} />
+                  <Route path="/perfil" element={<Login />} />
                   <Route path="/quienes-somos" element={<AboutUs />} />
                   <Route path="/registrarse" element={<SignIn />} />
                   <Route path="/iniciar-sesion" element={<LogIn />} />

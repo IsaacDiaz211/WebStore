@@ -1,24 +1,7 @@
-import { Container, Row, Col } from "react-bootstrap";
-import CarouselWelcome from "../components/CarouselWelcome.tsx";
 import CategoryCard from "../components/CategoryCard.tsx";
 
 
 const Home = () => {
-
-    const carouselImages: {src: string; alt: string}[] = [
-        {
-            src: "/images/carousel1.jpg",
-            alt: "Foto 1 del Carrusel",
-        },
-        {
-            src: "/images/carousel2.jpg",
-            alt: "Foto 2 del Carrusel",
-        },
-        {
-            src: "/images/carousel3.jpg",
-            alt: "Foto 3 del Carrusel",
-        },
-    ];
 
     const categorys: {src: string; title: string, link: string}[] = [
         {
@@ -39,24 +22,28 @@ const Home = () => {
     ];
     return (
         <>
-            <Container fluid className="m-0 p-0">
-                <Row className="m-0">
-                    <Col md={11} className="p-0">
-                        <CarouselWelcome images={carouselImages}/>
-                    </Col>
-                </Row>
-            </Container>
+            <div className="hero-fullscreen">
+                {/*Aún no me decido por los colores de la pagina
+                así que por el momento este será*/}
+                {/*<div className="hero-fullscreen">*/}
+                    <div className="hero-content">
+                        <h1>Bienvenido a Soundscape</h1>
+                        <p>Tu tienda de música favorita</p>
+                        <h1>Nuestras categorias</h1>
 
-
-            <h1>Nuestras categorias</h1>
-
-            <div className="d-flex gap-3 justify-content-center">
-                {categorys.map((cat, index) => (
-                    <CategoryCard key={index} image={cat.src} title={cat.title} link={cat.link} />
-                ))}
+                        <div className="d-flex gap-3 justify-content-center">
+                            {categorys.map((cat, index) => (
+                                <CategoryCard key={index} image={cat.src} title={cat.title} link={cat.link} />
+                            ))}
+                        </div>
+                    </div>
+                {/*</div>*/}
+            
+                {/*For the moment this is all the Home page. I will improve this in the future*/}
+            
+                
             </div>
         </>
-
     );
 };
 
