@@ -5,6 +5,7 @@
 
 import express from "express";
 import  helloRouter from  './HelloRouter';
+import  authRouter from  './AuthRouter';
 import {LogInfo} from "../utils/logger";
 
 let server = express();
@@ -18,5 +19,6 @@ rootRouter.get('/', (req: express.Request, res: express.Response) => {
 
 server.use('/', rootRouter);
 server.use('/hello', helloRouter);
+server.use('/auth', authRouter)
 
 export default server;

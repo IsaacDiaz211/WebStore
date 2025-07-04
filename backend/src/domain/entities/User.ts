@@ -41,7 +41,8 @@ const UserSchema = new Schema<IUser>({
   }
 });
 
-
+export const User = model<IUser>('User', UserSchema);
+/*
 // Middleware para hashear antes de guardar
 UserSchema.pre<IUser>('save', async function(next) {
   if (!this.isModified('password')) return next();
@@ -56,6 +57,5 @@ UserSchema.methods.comparePassword = async function(
   candidatePassword: string
 ): Promise<boolean> {
   return await bcrypt.compare(candidatePassword, this.password);
-};
+};*/
 
-export const User = model<IUser>('User', UserSchema);
