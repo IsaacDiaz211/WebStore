@@ -8,7 +8,6 @@ export class UserRepository {
     return await user.save();
   }
 
-
   public async findAll() {
     return await User.find().exec();
   }
