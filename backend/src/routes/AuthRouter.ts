@@ -13,4 +13,7 @@ authRouter.route('/login')
    .post(async(req: Request, res: Response) => {
         controller.login(req, res);
     });
+authRouter.get('/test', (req, res) => {
+  res.send('¡Ruta de prueba funciona!');
+});
 export default authRouter;

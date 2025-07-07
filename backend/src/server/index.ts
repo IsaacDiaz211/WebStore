@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express';
 import routes from '../routes';
 import { connectDB } from '../config/db';
+import bodyParser from 'body-parser';
 //import * as process from "node:process";
 //import swaggerJSDoc from 'swagger-jsdoc';
 
@@ -28,18 +29,20 @@ server.get("/docs", (req, res) => {
     res.send(swaggerHTML);
 });
 
+
+
+//server.use(bodyParser.json()); // Para parsear application/json
+server.use(express.urlencoded({ extended: true, limit: "50mb" }));
+server.use(express.json({limit: "50mb"}));
+
 server.use(
     '/api',
     routes);
-
 //Static server
 server.use(express.static('public'));
 
 server.use(helmet());
 server.use(cors());
-
-server.use(express.urlencoded({ extended: true, limit: "50mb" }));
-server.use(express.json({limit: "50mb"}));
 
 server.get('/', (req, res) => {
     res.redirect('/api');
