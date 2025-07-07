@@ -48,8 +48,8 @@ export class AuthController {
           process.env.JWT_SECRET || 'secret_fallback', // Clave secreta para firmar el token
           { expiresIn: '1h' } // Tiempo de expiración (1 hora)
         );
-        res.json({ token, user: { id: user._id, email: user.email, role: user.role } });
-        res.status(200).json({ message: 'Inicio de sesión exitoso' });
+        res.json({ token, user: { id: user._id, email: user.email, role: user.role }, message: 'Inicio de sesión exitoso' });
+        //res.status(200).json({ message: 'Inicio de sesión exitoso' });
       }
     } catch (error) {
       res.status(500).json({ message: 'Error al iniciar sesión' });

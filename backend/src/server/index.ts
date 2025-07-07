@@ -42,7 +42,17 @@ server.use(
 server.use(express.static('public'));
 
 server.use(helmet());
-server.use(cors());
+//server.use(cors());
+
+// Habilita CORS para todas las rutas. Esto me impedía consumir la api desde react
+//veremos cómo funciona
+// Configuración PROFESIONAL de CORS
+server.use(cors({
+  origin: 'http://localhost:5173', // URL exacta de tu frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true // Si usas cookies o tokens
+}));
 
 server.get('/', (req, res) => {
     res.redirect('/api');
