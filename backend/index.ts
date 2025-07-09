@@ -6,7 +6,7 @@ import {LogError, LogSuccess} from "./src/utils/logger";
 //Configuration the .env file
 dotenv.config();
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 
 server.listen(port, () => {
     LogSuccess(`Server started in http://localhost:${port}/api`);
