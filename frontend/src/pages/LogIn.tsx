@@ -3,28 +3,33 @@ import LogInCard from "../components/LogInCard";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+/*
+    Esta vista es la encargada de mostrar el formulario de inicio de sesión.
+    Recibe los datos del formulario y los envía al backend para el inicio de sesión.
+    Hago uso de useState de react para guardar los cambios en los campos de email, password y error.
+    Hago uso de useNavigate de react-router-dom para redirigir al usuario al perfil por fuera del componente
+    LogInCard.tsx.
+*/
+
 const LogIn=() => {
     const [email, setEmail] = useState('');
     const [pass, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
-    /*const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log("Datos para enviar al backend:", { email, pass });
-        //Acá tendría que hacer la petición al backend, en proceso
-        //pero por ahora solo lo imprimo en consola
-        // Aquí lo dejo mientras trato de probar consumir una api por primera vez*/
+
+    /*
+    Acá hago la petición al backend para el inicio de sesión
+    no tengo claro qué tan correcto es usar la petición al backend desde una vista,
+    por ahora quedará acá.
+    */
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("[DEBUG] handleSubmit ejecutado");
         try {
-            // Opción 2: Con axios (más limpia según DeepSeek, ya lo veremos)
-            /*const response = await axios.post(
-                 'http://localhost:8000/api/auth/login', 
-                 { email, password: pass }
-            );*/
-            const response = await axios.post('/api/auth/login', { email, password: pass }) // Sin "http://localhost:8000"
+            /*
+             Acá hago uso de axios, recomendación de DeepSeek. Aún no lo entiendo bien, así que queda pendiente para aprender.
+            */
+            const response = await axios.post('/api/auth/login', { email, password: pass })
 
             const { token, user } = response.data;
 
