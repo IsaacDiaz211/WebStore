@@ -1,4 +1,4 @@
-import {Get, Query, Route, Tags} from "tsoa";
+import {Delete, Get, Query, Route, Tags} from "tsoa";
 import {BasicResponse} from "../controllers/types/index";
 import {IUserController} from "../controllers/interfaces";
 import {LogSuccess} from "../utils/logger";
@@ -13,10 +13,28 @@ export class UserController implements IUserController{
     constructor() { 
         this.userRepo = new UserRepository();
     }
-
-    public async getUsers(): Promise<any> {
-        LogSuccess('[/api/users] Get All Users Request');
-        const response = this.userRepo.findAll();
+    @Get("/")
+    public async getUsers(@Query()id?: string): Promise<any> {
+        let response: any = '';
+        if(!id){
+            LogSuccess('[/api/users] Get All Users Request');
+            response = this.userRepo.findAll();
+        } else{
+            LogSuccess(`[/api/users] Get User by id: ${id}`);
+            response = this.userRepo.findById(id);
+        }  
+        return response;
+    }
+    @Delete("/")
+    public async deleteUser(@Query()id?: string): Promise<any> {
+        let response: any = '';
+        if(id){
+            LogSuccess(`[/api/users] Deleted User by id: ${id}`);
+            response = this.userRepo.deleteUserById(id);
+        } else{
+            LogSuccess(`[/api/users] No id provided`);
+            response = { message: 'Please, provide an id'};
+        } 
         return response;
     }
 }
