@@ -1,12 +1,26 @@
 import express from "express";
+
+//Conexión a la base de datos en MongoDB
+import { connectDB } from '../config/db';
+// Para seguridad
 import cors from 'cors';
 import helmet from 'helmet';
-import swaggerUi from 'swagger-ui-express';
+// Root Router
 import routes from '../routes';
-import { connectDB } from '../config/db';
+// Documentación
+import swaggerUi from 'swagger-ui-express';
+//import swaggerJSDoc from 'swagger-jsdoc';
 import bodyParser from 'body-parser';
 //import * as process from "node:process";
-//import swaggerJSDoc from 'swagger-jsdoc';
+
+
+/**
+ * El cors es lo que nos va a permitir que se hagan peticiones de dominios diferentes al que esté
+ * desplegada la aplicación. Por ejemplo si se despliega en localhost y luego otra aplicación que no está en el localhost
+ * no podrá realizar peticiones a través del navegador, no podría llegar a ocurrir o si
+ * están en dominios totalmente diferentes no podrían comunicarse. Entonces hay que habilitar el cors, se puede habilitar en
+ * términos generales de acuerdo que lo tenemos que hacer o se puede luego especificar listas blancas listas negras.
+ */
 
 const server = express();
 

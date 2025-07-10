@@ -8,7 +8,12 @@ export class AuthController {
   constructor() { 
     this.userRepo = new UserRepository();
   }
-
+  /**
+   * 
+   * @param req 
+   * @param res 
+   * @returns 
+   */
   async register(req: Request, res: Response) {
     console.log('Body recibido:', req.body); // Debug
     try {
@@ -28,7 +33,12 @@ export class AuthController {
     }
     
   }
-
+  /**
+   * 
+   * @param req 
+   * @param res 
+   * @returns 
+   */
   async login(req: Request, res: Response) {
     // Lógica para comparar contraseñas y generar JWT...
     const { email, password } = req.body;

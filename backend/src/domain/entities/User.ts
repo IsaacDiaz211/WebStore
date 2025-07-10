@@ -41,6 +41,11 @@ const UserSchema = new Schema<IUser>({
   }
 });
 
+/**
+ * Este modelo va a estar asignado a una colección en la base de datos y va a seguir este esquema 'UserSchema', de
+ * manera que se crea un modelo a través de typescript. Así que a partir de ahora si nosotros creamos 
+ * elementos en la base de datos van a seguir esta estructura.
+ */
 export const User = model<IUser>('User', UserSchema);
 /*
 // Middleware para hashear antes de guardar
