@@ -1,8 +1,9 @@
-import {Delete, Get, Query, Route, Tags} from "tsoa";
+import {Delete, Get, Post, Query, Route, Tags} from "tsoa";
 import {BasicResponse} from "../controllers/types/index";
 import {IUserController} from "../controllers/interfaces";
 import {LogSuccess} from "../utils/logger";
 import { UserRepository } from '../domain/repositories/UserRepository';
+import { Request, Response } from "express";
 
 @Route("/api/users")
 @Tags("UserController")
@@ -13,6 +14,12 @@ export class UserController implements IUserController{
     constructor() { 
         this.userRepo = new UserRepository();
     }
+
+    /**
+     * 
+     * @param {string} id 
+     * @returns 
+     */
     @Get("/")
     public async getUsers(@Query()id?: string): Promise<any> {
         let response: any = '';
@@ -25,6 +32,12 @@ export class UserController implements IUserController{
         }  
         return response;
     }
+
+    /**
+     * 
+     * @param {string} id 
+     * @returns 
+     */
     @Delete("/")
     public async deleteUser(@Query()id?: string): Promise<any> {
         let response: any = '';
@@ -36,5 +49,34 @@ export class UserController implements IUserController{
             response = { message: 'Please, provide an id'};
         } 
         return response;
+    }
+    /**
+     * 
+     * @param req 
+     * @param res 
+     * @returns 
+     */
+    @Post("/")
+    public async createUser(req: Request): Promise<any> {
+        let response: any = '';
+        console.log('Body recibido:', req.body);
+        try {
+            const { name, lastname, email, password, role } = req.body;
+            const userExists = await this.userRepo.findByEmail(email);
+
+            if (userExists) {
+                response = { message: 'El usuario ya existe' };
+            } else {
+                console.log('Se ingresó al else');
+                const newUser = await this.userRepo.create({ name, lastname, email, password, role });
+                response = { id: newUser._id, name, lastname, email, role };
+                LogSuccess('Usuario creado en MongoDB:');
+            }
+            return response;
+        } catch (error) {
+            console.error('Error en register:', error);
+            response = ({ message: 'Error en register' });
+            return response;
+        }
     }
 }

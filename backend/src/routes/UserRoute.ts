@@ -19,4 +19,9 @@ userRouter.route('/')
         const response: any = await controller.deleteUser(id);
         res.send(response);
     })
+    .post(async(req: Request, res: Response) => {
+        const controller: UserController = new UserController();
+        let response: any = await controller.createUser(req);
+        res.send(response);
+    })
 export default userRouter;

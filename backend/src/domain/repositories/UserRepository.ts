@@ -66,6 +66,7 @@ export class UserRepository {
         user.deleted = true;
       }
     }
+    user.save();
     return user;
   }
 }
