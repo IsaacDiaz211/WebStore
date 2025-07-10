@@ -17,7 +17,7 @@
 					"message"
 				],
 				"type": "object",
-				"description": "Basic JSON response for Controllers"
+				"description": "Basic JSON response for Controllers\r\nLos 'types' propios serán tipos complejos personalizados, de esta manera va a hacer mucho más\r\nfácil controlar qué es lo que nos va a devolver por ejemplo una promesa. En vez de devolvernos un objeto de tipo any."
 			}
 		},
 		"securitySchemes": {}

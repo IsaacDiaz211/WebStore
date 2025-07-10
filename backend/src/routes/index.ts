@@ -7,6 +7,7 @@ import express from "express";
 import helloRouter from  './HelloRouter';
 import authRouter from  './AuthRouter';
 import {LogInfo} from "../utils/logger";
+import userRouter from "./UserRoute";
 
 let server = express();
 
@@ -16,9 +17,10 @@ rootRouter.get('/', (req: express.Request, res: express.Response) => {
     LogInfo('Get: http://localhost:8000/api/')
     res.send("Hello World!");
 });
-console.log('Rutas cargadas: /auth/register, /auth/login');
+//console.log('Rutas cargadas: /auth/register, /auth/login');
 server.use('/', rootRouter);
 server.use('/hello', helloRouter);
 server.use('/auth', authRouter)
+server.use('/users', userRouter)
 
 export default server;

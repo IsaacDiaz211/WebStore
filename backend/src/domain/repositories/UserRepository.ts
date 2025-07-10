@@ -13,14 +13,14 @@ export class UserRepository {
     return await user.save();
   }
   /**
-   * 
+   * Devuelve una lista con todos los usuarios.
    * @returns 
    */
   public async findAll() {
     return await User.find().exec();
   }
   /**
-   * 
+   * Devuelve un Usuario buscando por su email.
    * @param email 
    * @returns User
    */
