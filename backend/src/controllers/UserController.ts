@@ -53,7 +53,6 @@ export class UserController implements IUserController{
     /**
      * 
      * @param req 
-     * @param res 
      * @returns 
      */
     @Post("/")
@@ -75,7 +74,36 @@ export class UserController implements IUserController{
             return response;
         } catch (error) {
             console.error('Error en register:', error);
-            response = ({ message: 'Error en register' });
+            response = ({ message: 'Error in register' });
+            return response;
+        }
+    }
+    /**
+     * 
+     * @param id 
+     * @param req 
+     * @returns 
+     */
+    
+    public async updateUser(id: string, req: Request): Promise<any> {
+        let response: any = '';
+        console.log('Body recibido:', req.body);
+        try{
+            
+            const { name, lastname, email, password, role } = req.body;
+            let userExists = await this.userRepo.findByEmail(email);
+
+            if (userExists) {
+                LogSuccess(`[/api/users] Update User by id: ${id}`);
+                userExists = await this.userRepo.updateUser({ name, lastname, email, password, role }, id);
+                response = { id, name, lastname, email, role };
+            } else {
+                LogSuccess('The user dosnt exist');
+                response = ({ message: 'Error in update' });
+            }
+            return response;
+        }catch {
+            response = (`[/api/users] Error updating user: ${id}`);
             return response;
         }
     }

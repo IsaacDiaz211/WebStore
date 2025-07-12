@@ -9,4 +9,5 @@ export interface IUserController {
     getUsers(id?: string): Promise<any>;
     deleteUser(id?: string): Promise<any>;
     createUser(req: Request): Promise<any>;
+    updateUser(id: string, req: Request): Promise<any>;
 }

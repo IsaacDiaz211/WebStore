@@ -27,7 +27,7 @@ const UserSchema = new Schema<IUser>({
     required: true,
     select: false,       // No se muestra en las consultas
     trim: true,          // Elimina espacios en blanco
-    maxlength: 50       // Validación
+    maxlength: 80       // Validación
   },
   role: {
     type: String,

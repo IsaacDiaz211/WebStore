@@ -53,9 +53,9 @@ export class UserRepository {
   async findActiveUsers(){
     return await User.find({deleted: false}).exec();
   }
-  async updateUser(userData: Partial<IUser>){
-    const user = new User(userData);
-    return await user.save();
+  async updateUser(userData: Partial<IUser>, id: string){
+    //let user = new User(userData);
+    return await User.findByIdAndUpdate(id, userData);
   }
   async deleteUserById(id: string){
     let user = await User.findById(id);

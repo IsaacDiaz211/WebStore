@@ -1,5 +1,5 @@
 {
-  "name": "soundscape",
+  "name": "shuandbooks",
   "version": "1.0.0",
   "description": "project in MERN",
   "main": "index.js",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brunoezeq/proyecto_soundscape.git"
+    "url": "git+https://github.com/IsaacDiaz211/WebStore.git"
   },
   "keywords": [
     "node",
@@ -23,15 +23,16 @@
     "swagger",
     "mongoose"
   ],
-  "author": "@isaacDiaz,@brunoPerez",
+  "author": "@isaacDiaz",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/brunoezeq/proyecto_soundscape/issues"
+    "url": "https://github.com/IsaacDiaz211/WebStore"
   },
-  "homepage": "https://github.com/brunoezeq/proyecto_soundscape#readme",
+  "homepage": "https://github.com/IsaacDiaz211/WebStore#readme",
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.10",
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
@@ -46,6 +47,7 @@
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
