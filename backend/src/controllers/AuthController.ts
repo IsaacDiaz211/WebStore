@@ -4,6 +4,7 @@ import { UserRepository } from '../domain/repositories/UserRepository';
 import { hashPassword, comparePassword } from '../utils/hash';
 import { LogInfo, LogSuccess, LogError } from '../utils/logger';
 import jwt from 'jsonwebtoken';
+import { AuthResponse } from "./types";
 
 @Route('/api/auth')
 @Tags('AuthController')
@@ -51,6 +52,7 @@ export class AuthController {
    */
   @Post('/login')
   async login(req: Request, res: Response) {
+    //let response: AuthResponse = { message: '', token : '' };
     const { email, password } = req.body;
     try {
       const user = await this.userRepo.findByEmail(email);
@@ -61,12 +63,17 @@ export class AuthController {
       if (!isMatch) {
         return res.status(400).json({ message: 'Credenciales inválidas' });
       } else {
-        const token = jwt.sign(
+        const tokenLogin = jwt.sign(
           { id: user._id, role: user.role },  // Datos del usuario a incluir en el token (payload)
-          process.env.JWT_SECRET || 'secret_fallback', // Clave secreta para firmar el token
+          process.env.SECRETKEY || 'secret_fallback', // Clave secreta para firmar el token
           { expiresIn: '1h' } // Tiempo de expiración (1 hora)
         );
-        res.json({ token, user: { id: user._id, email: user.email, role: user.role }, message: 'Inicio de sesión exitoso' });
+        /*response = {
+          message: 'Inicio de sesión exitoso',
+          token: tokenLogin
+        };*/
+        res.json({ tokenLogin, user: { id: user._id, email: user.email, role: user.role }, message: 'Inicio de sesión exitoso' });
+        //return response;
       }
     } catch (error) {
       res.status(500).json({ message: 'Error al iniciar sesión' });
