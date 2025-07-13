@@ -7,7 +7,14 @@ export interface IHelloController {
 
 export interface IUserController {
     getUsers(id?: string): Promise<any>;
+    getActiveUsers(): Promise<any>;
+    getDeleteUSers(): Promise<any>;
+    getUserByRol(role:string): Promise<any>;
     deleteUser(id?: string): Promise<any>;
-    createUser(req: Request): Promise<any>;
     updateUser(id: string, req: Request): Promise<any>;
+}
+
+export interface IAuthController {
+    login(req: Request, res: Response): Promise<any>;
+    register(req: Request, res: Response): Promise<any>;
 }

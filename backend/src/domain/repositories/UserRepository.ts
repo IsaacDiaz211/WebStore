@@ -53,6 +53,9 @@ export class UserRepository {
   async findActiveUsers(){
     return await User.find({deleted: false}).exec();
   }
+  async findUsersByRole(role: string){
+    return await User.find({role: role}).exec();
+  }
   async updateUser(userData: Partial<IUser>, id: string){
     //let user = new User(userData);
     return await User.findByIdAndUpdate(id, userData);

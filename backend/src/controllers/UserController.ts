@@ -1,9 +1,9 @@
-import {Delete, Get, Post, Query, Route, Tags} from "tsoa";
-import {BasicResponse} from "../controllers/types/index";
-import {IUserController} from "../controllers/interfaces";
-import {LogSuccess} from "../utils/logger";
-import { UserRepository } from '../domain/repositories/UserRepository';
+import { Delete, Get, Post, Query, Route, Tags} from "tsoa";
 import { Request, Response } from "express";
+import { BasicResponse } from "../controllers/types/index";
+import { IUserController } from "../controllers/interfaces";
+import { LogSuccess } from "../utils/logger";
+import { UserRepository } from '../domain/repositories/UserRepository';
 
 @Route("/api/users")
 @Tags("UserController")
@@ -32,7 +32,26 @@ export class UserController implements IUserController{
         }  
         return response;
     }
-
+    /**
+     * 
+     * @returns Active users
+     */
+    public async getActiveUsers(): Promise<any> {
+        LogSuccess('[/api/users] Get All Users Request');
+        return this.userRepo.findActiveUsers();
+    }
+    /**
+     * 
+     * @returns Deleted users
+     */
+    public async getDeleteUSers(): Promise<any> {
+        LogSuccess('[/api/users] Get Deleted Users Request');
+        return this.userRepo.findDeletedUsers();
+    }
+    public async getUserByRol(role:string): Promise<any> {
+        LogSuccess(`[/api/users] Get Users role: ${role}`);
+        return this.userRepo.findUsersByRole(role);
+    }
     /**
      * 
      * @param {string} id 
@@ -49,34 +68,6 @@ export class UserController implements IUserController{
             response = { message: 'Please, provide an id'};
         } 
         return response;
-    }
-    /**
-     * 
-     * @param req 
-     * @returns 
-     */
-    @Post("/")
-    public async createUser(req: Request): Promise<any> {
-        let response: any = '';
-        console.log('Body recibido:', req.body);
-        try {
-            const { name, lastname, email, password, role } = req.body;
-            const userExists = await this.userRepo.findByEmail(email);
-
-            if (userExists) {
-                response = { message: 'El usuario ya existe' };
-            } else {
-                console.log('Se ingresó al else');
-                const newUser = await this.userRepo.create({ name, lastname, email, password, role });
-                response = { id: newUser._id, name, lastname, email, role };
-                LogSuccess('Usuario creado en MongoDB:');
-            }
-            return response;
-        } catch (error) {
-            console.error('Error en register:', error);
-            response = ({ message: 'Error in register' });
-            return response;
-        }
     }
     /**
      * 

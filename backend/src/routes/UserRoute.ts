@@ -1,30 +1,27 @@
 import express, {Request, Response} from "express";
 import {UserController} from "../controllers/UserController"
 import {LogInfo} from "../utils/logger";
+import { verifyToken } from '../middlewares/verifyToken';
+import { checkRole } from '../middlewares/checkRole';
 
 let userRouter: express.Router = express.Router();
 
 userRouter.route('/')
-    .get(async(req: Request, res: Response) => {
+    .get(verifyToken, checkRole('admin'), async (req: Request, res: Response) => {
         let id: any = req?.query?.id;
         LogInfo(`Query param: ${id}`)
         const controller: UserController = new UserController();
         const response: any = await controller.getUsers(id);
         res.status(200).send(response);
     })
-    .delete(async(req: Request, res: Response) => {
+    .delete(verifyToken, checkRole('admin'), async(req: Request, res: Response) => {
         let id: any = req?.query?.id;
         LogInfo(`Query param: ${id}`)
         const controller: UserController = new UserController();
         const response: any = await controller.deleteUser(id);
         res.status(204).send(response);
     })
-    .post(async(req: Request, res: Response) => {
-        const controller: UserController = new UserController();
-        let response: any = await controller.createUser(req);
-        res.status(201).send(response);
-    })
-    .put(async(req: Request, res: Response) => {
+    .put(verifyToken, checkRole('admin'), async(req: Request, res: Response) => {
         let id: any = req?.query?.id;
         LogInfo(`Query param: ${id}`)
         const controller: UserController = new UserController();

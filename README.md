@@ -1,6 +1,6 @@
 # Proyecto ShuAndBooks
 
-## Desarrollo de un sitio web con el stack MERN con TS.
+# Desarrollo de un sitio web con el stack MERN con TS.
 
 En este proyecto iré realizando una tienda con operaciones CRUD con el objetivo de aprender el 
 stack. Iré anotando los pasos que voy haciendo, las dependecias que uso y para qué sirven.
@@ -12,6 +12,30 @@ También iré proporcionando los errores que me van ocurriendo durante el desarr
 pequeñas explicaciones.
 
 # BackEnd
+
+## Errores
+
+### Implementación de middlewares en las rutas
+verifyToken.ts: Se modificó la función `verifyToken` para asegurar que, en caso de error
+(token no proporcionado o verificación fallida), la función envíe la respuesta de error y
+luego retorne explícitamente, evitando así problemas de incompatibilidad de tipos con Express.
+Se pasó de esto:
+    if (!token) {
+        return res.status(403).send({
+            message: 'No token provided. No permission to access.'
+        });
+    }
+a esto:
+    if (!token) {
+        res.status(403).send({
+            message: 'No token provided. No permission to access.'
+        });
+        return; // Añadido para asegurar el retorno explícito
+    }
+Similar con checkRole.ts.
+Estos cambios resuelven los errores de incompatibilidad de tipos que surgían al usar los
+middlewares en las rutas de Express, asegurando que las funciones de middleware se comporten
+como se espera en términos de flujo de control y tipos de retorno.        
 
 ## Middleware 
 Es como el pegamento que une distintas partes de una aplicación. En el desarrollo de software, 

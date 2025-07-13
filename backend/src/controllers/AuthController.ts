@@ -1,5 +1,6 @@
 import { Post, Route, Tags} from "tsoa";
 import { Request, Response } from 'express';
+import { IAuthController } from "../controllers/interfaces";
 import { UserRepository } from '../domain/repositories/UserRepository';
 import { hashPassword, comparePassword } from '../utils/hash';
 import { LogInfo, LogSuccess, LogError } from '../utils/logger';
@@ -9,7 +10,7 @@ import { AuthResponse } from "./types";
 @Route('/api/auth')
 @Tags('AuthController')
 
-export class AuthController {
+export class AuthController implements IAuthController{
   private userRepo: UserRepository;
 
   constructor() { 
