@@ -1,6 +1,6 @@
 import express, {Request, Response} from "express";
-import {UserController} from "../controllers/UserController"
-import {LogInfo} from "../utils/logger";
+import { UserController } from "../controllers/UserController"
+import { LogInfo } from "../utils/logger";
 import { verifyToken } from '../middlewares/verifyToken';
 import { checkRole } from '../middlewares/checkRole';
 
@@ -31,11 +31,3 @@ userRouter.route('/')
         res.status(204).send(response);
     })
 export default userRouter;
-
-/**
- * Get documents => 200 ok
- * Creation document => 201 ok
- * Deletion document => 200 ok  | 204 (no return)
- * Update document => 200 ok
- * 
- */

@@ -18,8 +18,8 @@ export class AuthController implements IAuthController{
   }
   /**
    * 
-   * @param req 
-   * @param res 
+   * @param { Request }req 
+   * @param { Response }res 
    * @returns 
    */
   @Post('/register')

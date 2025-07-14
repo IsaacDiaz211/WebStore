@@ -39,7 +39,7 @@ const UserSchema = new Schema<IUser>({
     type: Boolean,
     default: false
   }
-});
+}, {timestamps: true});
 
 /**
  * Este modelo va a estar asignado a una colección en la base de datos y va a seguir este esquema 'UserSchema', de

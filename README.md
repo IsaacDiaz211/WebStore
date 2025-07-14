@@ -37,7 +37,25 @@ Estos cambios resuelven los errores de incompatibilidad de tipos que surgían al
 middlewares en las rutas de Express, asegurando que las funciones de middleware se comporten
 como se espera en términos de flujo de control y tipos de retorno.        
 
-## Códigos en Status 
+## Códigos de estado en HTTP en Status 
+¿Qué son los códigos de estado HTTP?
+Los códigos de estado HTTP son números de 3 dígitos que un servidor devuelve al cliente (por
+ejemplo, un navegador o una app móvil) para indicar el resultado de una solicitud HTTP.
+Ayudan a entender si la petición fue exitosa, si hubo errores, o si se requiere alguna acción
+adicional.
+
+En el proyecto se usan estos códigos con el método .status(código) antes de enviar la
+respuesta con .send() en las rutas.
+
+### Códigos de estado comunes y representativos
+200     OK                      Solicitud exitosa, devuelve datos
+201     Created                 Recurso creado exitosamente (ej: después de un POST)
+204     No Content              Solicitud exitosa, sin contenido que devolver
+400     Bad Request             La solicitud tiene un error (datos inválidos, faltantes, etc.)
+401     Unauthorized            El usuario no está autenticado
+403     Forbidden               El usuario no tiene permisos para acceder al recurso
+404     Not Found               El recurso solicitado no existe
+500     Internal Server Error   Error del lado del servidor
 
 ## Middleware 
 Es como el pegamento que une distintas partes de una aplicación. En el desarrollo de software, 

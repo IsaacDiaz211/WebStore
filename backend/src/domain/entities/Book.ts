@@ -20,25 +20,20 @@ const BookSchema = new Schema<IBook>({
     type: String, 
     maxlength: 500 
   },
-  category: { 
-    type: String, 
+  categories: { 
+    type: [{ type: Schema.Types.ObjectId, ref: 'Category'}], 
     required: true,
-    enum: ['novela', 'historico', 'no-ficcion']  // Valores permitidos
   },
   stock: { 
     type: Number, 
     required: true,
     default: 0          // Valor por defecto
   },
-  createdAt: { 
-    type: Date, 
-    default: Date.now    // Fecha automática
-  },
   deleted: {
     type: Boolean,
     default: false
   }
-});
+}, {timestamps: true});
 
 // 3. Exporta el modelo
 export const Book = model<IBook>('Book', BookSchema);
