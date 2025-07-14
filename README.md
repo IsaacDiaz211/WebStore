@@ -37,6 +37,8 @@ Estos cambios resuelven los errores de incompatibilidad de tipos que surgían al
 middlewares en las rutas de Express, asegurando que las funciones de middleware se comporten
 como se espera en términos de flujo de control y tipos de retorno.        
 
+## Códigos en Status 
+
 ## Middleware 
 Es como el pegamento que une distintas partes de una aplicación. En el desarrollo de software, 
 especialmente en entornos como Node.js o frameworks como Express, un middleware es una función 
@@ -68,5 +70,7 @@ Pero puede dar problemas al instalar o compilar en algunos entornos (especialmen
 Es una implementación 100% en JavaScript.
 Es más fácil de instalar y no tiene dependencias nativas.
 Un poco más lento, pero para proyectos pequeños o educativos está más que bien.
+
+## Paginoción
 
 # FrontEnd

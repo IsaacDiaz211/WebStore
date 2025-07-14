@@ -1,3 +1,4 @@
+import { UserResponse } from 'controllers/types';
 import { User } from '../entities/User';
 import { IUser } from '../interfaces/IUser';
 import  Partial  from 'mongoose'
@@ -16,8 +17,25 @@ export class UserRepository {
    * Devuelve una lista con todos los usuarios.
    * @returns List<User>
    */
-  public async findAll() {
-    return await User.find().exec();
+  public async findAll(page: number, max: number) {
+    let response: UserResponse = {
+      users: [],
+      totalPages: 1,
+      currentPage: page
+    };
+    await User.find()
+      .limit(max)
+      .skip((page - 1) * max)
+      .exec().then((users: IUser[]) => {
+        response.users = users;
+      });
+    await User.countDocuments().exec().then((count: number) => {
+      let totalPages = Math.ceil(count / max);
+      let currentPage = page;
+      response.totalPages = totalPages;
+      response.currentPage = currentPage;
+    });
+    return response;
   }
   /**
    * Devuelve un Usuario buscando por su email.

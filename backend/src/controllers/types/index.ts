@@ -4,6 +4,9 @@
 * fácil controlar qué es lo que nos va a devolver por ejemplo una promesa. En vez de devolvernos un objeto de tipo any.
 */
 
+import { IUser } from "domain/interfaces/IUser";
+
+
 export type BasicResponse = {
     message: string;
 }
@@ -16,4 +19,10 @@ export type ErrorResponse = {
 export type AuthResponse = {
     message: string,
     token: string
+}
+
+export type UserResponse = {
+    users: IUser[],
+    totalPages: number,
+    currentPage: number
 }

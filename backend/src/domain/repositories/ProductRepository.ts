@@ -1,15 +1,15 @@
 // backend/src/domain/repositories/ProductRepository.ts
-import { Product } from '../entities/Product';
-import { IProduct } from '../interfaces/IProduct';
+import { Book } from '../entities/Book';
+import { IBook } from '../interfaces/IBook';
 
 export class ProductRepository {
     
-  async create(productData: IProduct) {
-    const product = new Product(productData);
-    return await product.save();
+  async create(bookData: IBook) {
+    const book = new Book(bookData);
+    return await book.save();
   }
 
   async findAll() {
-    return await Product.find().exec();
+    return await Book.find().exec();
   }
 }

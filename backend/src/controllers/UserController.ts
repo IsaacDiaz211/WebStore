@@ -21,11 +21,11 @@ export class UserController implements IUserController{
      * @returns 
      */
     @Get("/")
-    public async getUsers(@Query()id?: string): Promise<any> {
+    public async getUsers(@Query()page: number, @Query()limit: number, @Query()id?: string): Promise<any> {
         let response: any = '';
         if(!id){
             LogSuccess('[/api/users] Get All Users Request');
-            response = this.userRepo.findAll();
+            response = this.userRepo.findAll(page, limit);
         } else{
             LogSuccess(`[/api/users] Get User by id: ${id}`);
             response = this.userRepo.findById(id);

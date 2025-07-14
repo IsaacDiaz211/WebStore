@@ -1,10 +1,10 @@
 import { Schema, model } from 'mongoose';
-import { IProduct } from '../interfaces/IProduct';
+import { IBook } from '../interfaces/IBook';
 // 1. Interfaz TypeScript
 
 
 // 2. Esquema
-const ProductSchema = new Schema<IProduct>({
+const BookSchema = new Schema<IBook>({
   name: { 
     type: String, 
     required: true, 
@@ -23,7 +23,7 @@ const ProductSchema = new Schema<IProduct>({
   category: { 
     type: String, 
     required: true,
-    enum: ['guitarras', 'baterías', 'teclados']  // Valores permitidos
+    enum: ['novela', 'historico', 'no-ficcion']  // Valores permitidos
   },
   stock: { 
     type: Number, 
@@ -41,4 +41,4 @@ const ProductSchema = new Schema<IProduct>({
 });
 
 // 3. Exporta el modelo
-export const Product = model<IProduct>('Product', ProductSchema);
+export const Book = model<IBook>('Book', BookSchema);
