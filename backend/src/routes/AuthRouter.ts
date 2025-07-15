@@ -1,4 +1,4 @@
-import express, {Request, Response} from "express";
+import express, { Request, Response } from "express";
 import {AuthController} from "../controllers/AuthController"
 import cors from 'cors';
 //import {LogInfo} from "../utils/logger";

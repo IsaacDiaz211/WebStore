@@ -8,6 +8,7 @@ import helloRouter from  './HelloRouter';
 import authRouter from  './AuthRouter';
 import {LogInfo} from "../utils/logger";
 import userRouter from "./UserRoute";
+import bookRoute from "./BookRoute";
 
 let server = express();
 
@@ -20,7 +21,8 @@ rootRouter.get('/', (req: express.Request, res: express.Response) => {
 //console.log('Rutas cargadas: /auth/register, /auth/login');
 server.use('/', rootRouter);
 server.use('/hello', helloRouter);
-server.use('/auth', authRouter)
-server.use('/users', userRouter)
+server.use('/auth', authRouter);
+server.use('/users', userRouter);
+server.use('/books', bookRoute);
 
 export default server;

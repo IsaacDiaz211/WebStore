@@ -5,6 +5,7 @@
 */
 
 import { IUser } from "domain/interfaces/IUser";
+import { IBook } from "domain/interfaces/IBook";
 
 
 export type BasicResponse = {
@@ -23,6 +24,12 @@ export type AuthResponse = {
 
 export type UserResponse = {
     users: IUser[],
+    totalPages: number,
+    currentPage: number
+}
+
+export type BookResponse = {
+    books: IBook[],
     totalPages: number,
     currentPage: number
 }

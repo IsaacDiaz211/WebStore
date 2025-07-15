@@ -5,7 +5,7 @@ import { IBook } from '../interfaces/IBook';
 
 // 2. Esquema
 const BookSchema = new Schema<IBook>({
-  name: { 
+  title: { 
     type: String, 
     required: true, 
     trim: true,          // Elimina espacios en blanco
@@ -16,19 +16,48 @@ const BookSchema = new Schema<IBook>({
     required: true,
     min: 100               // Precio no negativo
   },
-  description: { 
+  /*description: { 
     type: String, 
-    maxlength: 500 
+    maxlength: 144 
   },
-  categories: { 
-    type: [{ type: Schema.Types.ObjectId, ref: 'Category'}], 
+  author:{
+    type: String,
     required: true,
+    trim: true,
+    maxlength: 30
   },
+  editorial:{
+    type: String,
+    required: true,
+    trim: true,
+    maxlength: 30
+  },
+  language:{
+    type: String,
+    required: true,
+    trim: true,
+    maxlength: 30
+  },*/
   stock: { 
     type: Number, 
     required: true,
     default: 0          // Valor por defecto
   },
+  /*categories: { 
+    type: [{ type: Schema.Types.ObjectId, ref: 'Category'}], 
+    required: true,
+  },*/
+  imageCover: {
+    type: String,
+    required: true,
+    trim: true,
+    maxlength: 200
+  },
+  /*imageBack: {
+    type: String,
+    trim: true,
+    maxlength: 200
+  },*/
   deleted: {
     type: Boolean,
     default: false

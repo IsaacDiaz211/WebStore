@@ -1,5 +1,7 @@
 import {BasicResponse} from "controllers/types"
+import { IBook } from "domain/interfaces/IBook";
 import { Request, Response } from "express";
+//import { IBook } from "/domain/interfaces/IBook";
 
 export interface IHelloController {
     getMessage(name?:string): Promise<BasicResponse>;
@@ -19,7 +21,10 @@ export interface IAuthController {
     register(req: Request, res: Response): Promise<any>;
 }
 
-export interface IBookController{}
+export interface IBookController{
+    createBook(req: IBook, res: Response): Promise<any>;
+    getBooks(page: number, limit: number, id?: string): Promise<any>;
+}
 
 export interface ICategoryControllerq{}
 
