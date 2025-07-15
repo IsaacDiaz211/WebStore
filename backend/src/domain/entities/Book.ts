@@ -16,7 +16,7 @@ const BookSchema = new Schema<IBook>({
     required: true,
     min: 100               // Precio no negativo
   },
-  /*description: { 
+  description: { 
     type: String, 
     maxlength: 144 
   },
@@ -37,27 +37,27 @@ const BookSchema = new Schema<IBook>({
     required: true,
     trim: true,
     maxlength: 30
-  },*/
+  },
   stock: { 
     type: Number, 
     required: true,
     default: 0          // Valor por defecto
   },
-  /*categories: { 
+  categories: { 
     type: [{ type: Schema.Types.ObjectId, ref: 'Category'}], 
     required: true,
-  },*/
+  },
   imageCover: {
     type: String,
     required: true,
     trim: true,
     maxlength: 200
   },
-  /*imageBack: {
+  imageBack: {
     type: String,
     trim: true,
     maxlength: 200
-  },*/
+  },
   deleted: {
     type: Boolean,
     default: false

@@ -7,9 +7,12 @@ let bookRoute: express.Router = express.Router();
 const controller = new BookController();
 
 bookRoute.route('/')
-    .post(upload.single('imageCover'), async(req: Request, res: Response) => {
-        LogInfo('Llegamos al router');
-        controller.createBook(req, res);
+    .post(upload.fields([
+        { name: 'imageCover', maxCount: 1 },
+        { name: 'imageBack', maxCount: 1 }]),
+        async(req: Request, res: Response) => {
+            LogInfo('Llegamos al router');
+            controller.createBook(req, res);
 });
 
 export default bookRoute;

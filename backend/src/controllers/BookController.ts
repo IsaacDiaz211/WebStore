@@ -19,17 +19,40 @@ export class BookController implements IBookController{
     public async createBook(req: Request, res: Response): Promise<any> {
         try{
             LogInfo(`Entramos al try`);
-            const { title, price, stock } = req.body;
-            const file = req.file;
-            if (!file) {
-                return res.status(400).json({ message: "Imagen requerida" });
+            const { title, price, description, author, editorial, language, stock } = req.body;
+            const categories = req.body.categories.split(',');
+            /* otra opcíon a revisar:
+                const rawCategories = req.body.categories;
+                const categories = typeof rawCategories === 'string'
+                ? rawCategories.split(',').map(id => id.trim())
+                : [];
+            */
+            const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+
+            if (!files.imageCover || files.imageCover.length === 0) {
+                return res.status(400).json({ message: 'La portada (imageCover) es requerida' });
             }
-            const result = await uploadToCloudinary(file.buffer, 'books');
+            // Subida obligatoria de portada
+            const coverResult = await uploadToCloudinary(files.imageCover[0].buffer);
+
+            // Subida opcional de contratapa
+            let backResultUrl: string | undefined = undefined;
+            if (files.imageBack && files.imageBack.length > 0) {
+                const backResult = await uploadToCloudinary(files.imageBack[0].buffer);
+                backResultUrl = backResult.secure_url;
+            }
             const newBook = await this.bookRepo.create({
                 title, 
-                price, 
-                stock, 
-                imageCover: result.secure_url});
+                price,
+                description,
+                author,
+                editorial,
+                language,
+                stock,
+                categories,
+                imageCover: coverResult.secure_url,
+                imageBack: backResultUrl
+            });
             return res.status(201).json({book: newBook._id, title});
         } catch (error) {
             //Reemplazar por LogError
