@@ -1,5 +1,4 @@
-import {BasicResponse} from "controllers/types"
-import { IBook } from "domain/interfaces/IBook";
+import {BasicResponse} from "controllers/types";
 import { Request, Response } from "express";
 //import { IBook } from "/domain/interfaces/IBook";
 
@@ -22,7 +21,7 @@ export interface IAuthController {
 }
 
 export interface IBookController{
-    createBook(req: IBook, res: Response): Promise<any>;
+    createBook(req: Request, res: Response): Promise<any>;
     getBooks(page: number, limit: number, id?: string): Promise<any>;
 }
 

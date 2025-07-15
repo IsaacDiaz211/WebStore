@@ -4,7 +4,8 @@ import { IBook } from '../interfaces/IBook';
 import  Partial  from 'mongoose';
 
 export class BookRepository {
-    async createBook(bookData: Partial<IBook>) {
+    async create(bookData: Partial<IBook>) {
+        console.log(`[BookRepository]: Creating book`);
         const book = new Book(bookData);
         return await book.save();
     }

@@ -89,6 +89,17 @@ Es una implementación 100% en JavaScript.
 Es más fácil de instalar y no tiene dependencias nativas.
 Un poco más lento, pero para proyectos pequeños o educativos está más que bien.
 
-## Paginoción
+## Paginación
+
+## Cloudinary
+
+### Módulo 'uuid'
+
+El módulo 'uuid' sirve para generar identificadores únicos universales (UUIDs). En concreto
+cuando ves import { v4 as uuidv4 } from 'uuid';, se está trayendo la función que crea UUIDs de
+versión 4, que son completamente aleatorios.
+En el contexto de subir una imagen a Cloudinary, uuidv4() se suele usar para generar un nombre
+de archivo único, como parte del public_id, evitando colisiones entre imágenes que podrían
+tener el mismo nombre original.
 
 # FrontEnd
