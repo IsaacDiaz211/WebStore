@@ -17,9 +17,27 @@ export type ErrorResponse = {
     message: string
 }
 
-export type AuthResponse = {
+export type LoginInput = {
+    email: string;
+    password: string;
+}
+
+export type LoginResponse = {
     message: string,
-    token: string
+    token: string | null
+}
+
+export interface RegisterInput {
+  name: string;
+  lastname: string;
+  email: string;
+  password: string;
+  role: 'admin' | 'customer';
+}
+
+export type RegisterResponse ={
+    message: string,
+    user: IUser | null
 }
 
 export type PaginatedUserResponse = {

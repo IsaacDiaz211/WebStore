@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { BasicResponse, PaginatedUserResponse } from "controllers/types";
+import { BasicResponse, PaginatedUserResponse, RegisterResponse, LoginResponse, RegisterInput, LoginInput } from "controllers/types";
 import { IUser } from "domain/interfaces/IUser";
 
 export interface IHelloController {
@@ -16,8 +16,8 @@ export interface IUserController {
 }
 
 export interface IAuthController {
-    login(req: Request, res: Response): Promise<any>;
-    register(req: Request, res: Response): Promise<any>;
+    login(body: LoginInput): Promise<LoginResponse>;
+    register(body: RegisterInput): Promise<RegisterResponse>;
 }
 
 export interface IBookController{
