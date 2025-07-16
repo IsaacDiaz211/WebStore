@@ -1,4 +1,4 @@
-import { UserResponse } from 'controllers/types';
+import { PaginatedUserResponse } from 'controllers/types';
 import { User } from '../entities/User';
 import { IUser } from '../interfaces/IUser';
 import  Partial  from 'mongoose'
@@ -18,7 +18,7 @@ export class UserRepository {
    * @returns List<User>
    */
   public async findAll(page: number, max: number) {
-    let response: UserResponse = {
+    let response: PaginatedUserResponse = {
       users: [],
       totalPages: 1,
       currentPage: page
@@ -65,14 +65,65 @@ export class UserRepository {
    * O si se busca consistencia en el estilo de código, especialmente si otras funciones similares ya usan await. Como es nuestro caso.
    * @returns 
    */
-  async findDeletedUsers(){
-    return await User.find({deleted: true}).exec();
+  async findDeletedUsers(page: number, max: number){
+    let response: PaginatedUserResponse = {
+      users: [],
+      totalPages: 1,
+      currentPage: page
+    };
+    await User.find({deleted: true})
+     .limit(max)
+     .skip((page - 1) * max)
+     .exec().then((users: IUser[]) => {
+        response.users = users;
+      });
+    await User.countDocuments().exec().then((count: number) => {
+      let totalPages = Math.ceil(count / max);
+      let currentPage = page;
+      response.totalPages = totalPages;
+      response.currentPage = currentPage;
+    });
+    return response;
   }
-  async findActiveUsers(){
-    return await User.find({deleted: false}).exec();
+  async findActiveUsers(page: number, max: number){
+    let response: PaginatedUserResponse = {
+      users: [],
+      totalPages: 1,
+      currentPage: page
+    };
+    await User.find({deleted: false})
+     .limit(max)
+     .skip((page - 1) * max)
+     .exec().then((users: IUser[]) => {
+        response.users = users;
+      });
+    await User.countDocuments().exec().then((count: number) => {
+      let totalPages = Math.ceil(count / max);
+      let currentPage = page;
+      response.totalPages = totalPages;
+      response.currentPage = currentPage;
+    });
+    return response;
   }
-  async findUsersByRole(role: string){
-    return await User.find({role: role}).exec();
+  async findUsersByRole(p_role: string, page: number, max: number){
+    let response: PaginatedUserResponse = {
+      users: [],
+      totalPages: 1,
+      currentPage: page
+    };
+    await User.find({role: p_role})
+     .limit(max)
+     .skip((page - 1) * max)
+     .exec().then((users: IUser[]) => {
+        response.users = users;
+      });
+    await User.countDocuments().exec().then((count: number) => {
+      let totalPages = Math.ceil(count / max);
+      let currentPage = page;
+      response.totalPages = totalPages;
+      response.currentPage = currentPage;
+    });
+    return response;
   }
   async updateUser(userData: Partial<IUser>, id: string){
     //let user = new User(userData);

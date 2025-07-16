@@ -22,7 +22,7 @@ export type AuthResponse = {
     token: string
 }
 
-export type UserResponse = {
+export type PaginatedUserResponse = {
     users: IUser[],
     totalPages: number,
     currentPage: number

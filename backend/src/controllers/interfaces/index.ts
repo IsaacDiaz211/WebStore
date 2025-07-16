@@ -1,18 +1,18 @@
-import {BasicResponse} from "controllers/types";
 import { Request, Response } from "express";
-//import { IBook } from "/domain/interfaces/IBook";
+import { BasicResponse, PaginatedUserResponse } from "controllers/types";
+import { IUser } from "domain/interfaces/IUser";
 
 export interface IHelloController {
     getMessage(name?:string): Promise<BasicResponse>;
 }
 
 export interface IUserController {
-    getUsers(page: number, limit: number, id?: string): Promise<any>;
-    getActiveUsers(): Promise<any>;
-    getDeleteUSers(): Promise<any>;
-    getUserByRol(role:string): Promise<any>;
-    deleteUser(id?: string): Promise<any>;
-    updateUser(id: string, req: Request): Promise<any>;
+    getUsers(page: number, limit: number, id?: string): Promise<PaginatedUserResponse | IUser | null>;
+    getActiveUsers(page: number, limit: number): Promise<PaginatedUserResponse | null>;
+    getDeletedUsers(page: number, limit: number): Promise<PaginatedUserResponse | null>;
+    getUsersByRol(page: number, limit: number, role:string): Promise<PaginatedUserResponse | null>;
+    deleteUser(id?: string): Promise<IUser | null>;
+    updateUser(id: string, req: Request): Promise<IUser | null>;
 }
 
 export interface IAuthController {
