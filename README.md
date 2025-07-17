@@ -57,6 +57,7 @@ respuesta con .send() en las rutas.
 404     Not Found               El recurso solicitado no existe
 500     Internal Server Error   Error del lado del servidor
 
+Más sobre los códigos de estado: https://developer.mozilla.org/es/docs/Web/HTTP/Reference/Status
 ## Middleware 
 Es como el pegamento que une distintas partes de una aplicación. En el desarrollo de software, 
 especialmente en entornos como Node.js o frameworks como Express, un middleware es una función 

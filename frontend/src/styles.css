@@ -18,8 +18,9 @@
     width: 100vw; /* 100% del viewport width */
     margin-left: calc(-50vw + 50%); /* Truco para centrar sin scroll horizontal */
     height: 100vh; /* 100% del viewport height */
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
-    
+    background: linear-gradient(135deg, #5B3E96, #6e8efb, #a777e3);
+    /*background: linear-gradient(135deg, #5B3E96, #A377D1);*/
+
     display: flex;
     align-items: center;
     justify-content: center;

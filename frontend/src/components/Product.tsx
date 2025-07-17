@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/Button';
+/*import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 
@@ -24,4 +24,46 @@ const Product = ({image, title, price, link}: ProductProps) => {
   );
 }
 
-export default Product;
+export default Product;*/
+
+// src/components/ProductCard/ProductCard.tsx
+import {
+  Card,
+  CardHeader,
+  CardPreview,
+  Body1,
+  Button,
+  makeStyles,
+} from "@fluentui/react-components";
+import { Book } from "../types/book";
+
+const useStyles = makeStyles({
+  image: {
+    width: "100%",
+    objectFit: "cover",
+    aspectRatio: "4 / 3",
+    borderRadius: "8px",
+  },
+  card: {
+    maxWidth: "100%",
+  },
+});
+
+type Props = {
+  product: Book;
+};
+
+export const ProductCard = ({ product }: Props) => {
+  const styles = useStyles();
+
+  return (
+    <Card className={styles.card}>
+      <CardHeader header={<Body1>{product.title}</Body1>} />
+      <CardPreview>
+        <img src={product.image} alt={product.title} className={styles.image} />
+      </CardPreview>
+      <Body1>{product.price} USD</Body1>
+      <Button appearance="primary">Add to Cart</Button>
+    </Card>
+  );
+};

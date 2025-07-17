@@ -1,4 +1,4 @@
-import { useState } from "react";
+/*import { useState } from "react";
 import {Container, Row, Col} from "react-bootstrap";
 import Product from "../components/Product";
 import PaginationComp from "../components/PaginationComp";
@@ -41,12 +41,60 @@ const Catalogue = () => {
                     ))}
                 </Row>
 
-                {/* Paginación */}
+                {/* Paginación *
                 <PaginationComp totalPages={totalPages} currentPage={currentPage} onPageChange={setCurrentPage} />
                 </Col>
             </Row>
         </Container>
     );
+};
+
+export default Catalogue;*/
+// src/pages/Catalogue.tsx
+import { ProductCard } from "../components/Product";
+import { Book } from "../types/book";
+import { makeStyles } from "@fluentui/react-components";
+
+const useStyles = makeStyles({
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+    gap: "1rem",
+    padding: "1rem",
+  },
+});
+
+const dummyProducts: Book[] = [
+  {
+    id: "1",
+    title: "Romeo y Julieta",
+    image: "https://via.placeholder.com/300x200?text=Guitar",
+    price: 499,
+  },
+  {
+    id: "2",
+    title: "Tópicos de Ingeniería de Software",
+    image: "https://via.placeholder.com/300x200?text=Drums",
+    price: 799,
+  },
+  {
+    id: "3",
+    title: "Los versos satánicos",
+    image: "https://via.placeholder.com/300x200?text=Piano",
+    price: 899,
+  },
+];
+
+export const Catalogue = () => {
+  const styles = useStyles();
+
+  return (
+    <div className={styles.grid}>
+      {dummyProducts.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  );
 };
 
 export default Catalogue;
