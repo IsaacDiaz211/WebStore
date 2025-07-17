@@ -47,6 +47,11 @@ export type PaginatedUserResponse = {
 }
 
 export type BookResponse = {
+    book: IBook | null,
+    id: string | null,
+    message: string
+}
+export type PaginatedBooksResponse = {
     books: IBook[],
     totalPages: number,
     currentPage: number

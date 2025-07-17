@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import { BasicResponse, PaginatedUserResponse, RegisterResponse, LoginResponse, RegisterInput, LoginInput } from "controllers/types";
+import { BasicResponse, PaginatedUserResponse, RegisterResponse, LoginResponse, RegisterInput, LoginInput, BookResponse, PaginatedBooksResponse } from "controllers/types";
 import { IUser } from "domain/interfaces/IUser";
+import { IBook } from "domain/interfaces/IBook";
 
 export interface IHelloController {
     getMessage(name?:string): Promise<BasicResponse>;
@@ -21,8 +22,13 @@ export interface IAuthController {
 }
 
 export interface IBookController{
-    createBook(req: Request, res: Response): Promise<any>;
-    getBooks(page: number, limit: number, id?: string): Promise<any>;
+    createBook(req: Request): Promise<BookResponse>;
+    getBooks(page: number, limit: number, id?: string): Promise<PaginatedBooksResponse | BookResponse | null>;
+    getActiveBooks(page: number, limit: number): Promise<PaginatedBooksResponse | null>;
+    getDeletedBooks(page: number, limit: number): Promise<PaginatedBooksResponse | null>;
+    getBooksByCategory(page: number, limit: number, category:string): Promise<PaginatedBooksResponse | null>;
+    updateBook(id: string, req: Request): Promise<IBook | null>;
+    deleteBook(id?: string): Promise<IBook | null>;
 }
 
 export interface ICategoryControllerq{}

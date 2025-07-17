@@ -24,7 +24,7 @@ export class AuthController extends Controller implements IAuthController{
    * @returns 
    */
   @Post('/register')
-  async register(@Body()body: RegisterInput): Promise<RegisterResponse> {
+  async register(@Body() body: RegisterInput): Promise<RegisterResponse> {
     LogInfo(`Body recibido: ${body}`); // Debug
     try {
       const userExists = await this.userRepo.findByEmail(body.email);
@@ -65,7 +65,7 @@ export class AuthController extends Controller implements IAuthController{
    * @returns 
    */
   @Post('/login')
-  async login(@Body()body: LoginInput): Promise<LoginResponse> {
+  async login(@Body() body: LoginInput): Promise<LoginResponse> {
     //const { email, password } = req.body;
     try {
       const user = await this.userRepo.findByEmail(body.email);

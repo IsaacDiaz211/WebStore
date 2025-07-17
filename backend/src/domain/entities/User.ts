@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose';
 import { IUser } from '../interfaces/IUser';
-import bcrypt  from 'bcrypt';
 
 const UserSchema = new Schema<IUser>({
   name: {
@@ -47,20 +46,3 @@ const UserSchema = new Schema<IUser>({
  * elementos en la base de datos van a seguir esta estructura.
  */
 export const User = model<IUser>('User', UserSchema);
-/*
-// Middleware para hashear antes de guardar
-UserSchema.pre<IUser>('save', async function(next) {
-  if (!this.isModified('password')) return next();
-  
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-});
-
-// Método para comparar contraseñas
-UserSchema.methods.comparePassword = async function(
-  candidatePassword: string
-): Promise<boolean> {
-  return await bcrypt.compare(candidatePassword, this.password);
-};*/
-

@@ -1,4 +1,4 @@
-import { Body, Delete, Get, Path, Put, Query, Route, Tags } from "tsoa";
+import { Body, Controller, Delete, Get, Path, Put, Query, Route, Tags } from "tsoa";
 import { Request } from "express";
 import { PaginatedUserResponse } from "../controllers/types/index";
 import { IUserController } from "../controllers/interfaces";
@@ -9,10 +9,11 @@ import { UserRepository } from '../domain/repositories/UserRepository';
 @Route("/api/users")
 @Tags("UserController")
 
-export class UserController implements IUserController{
+export class UserController extends Controller implements IUserController{
     private userRepo: UserRepository;
 
     constructor() { 
+        super();
         this.userRepo = new UserRepository();
     }
 
@@ -27,20 +28,21 @@ export class UserController implements IUserController{
     public async getUsers(
         @Query()page: number, 
         @Query()limit: number, 
-        @Query()id?: string
+        @Path()id?: string
     ): Promise<PaginatedUserResponse | IUser | null> {
-        let response: PaginatedUserResponse | IUser | null;
         try {
             if(!id){
                 LogSuccess('[/api/users] Get All Users Request');
-                response = await this.userRepo.findAll(page, limit);
+                this.setStatus(200);
+                return await this.userRepo.findAll(page, limit);
             } else{
                 LogSuccess(`[/api/users] Get User by id: ${id}`);
-                response = await this.userRepo.findById(id);
-            }  
-            return response;
+                this.setStatus(200);
+                return await this.userRepo.findById(id);
+            }
         } catch (error) {
             LogError(`in ` + JSON.stringify(error));
+            this.setStatus(400);
             return null;
         }
     }
@@ -56,13 +58,13 @@ export class UserController implements IUserController{
         @Query()page: number,
         @Query()limit: number
     ): Promise<PaginatedUserResponse | null> {
-        let response: PaginatedUserResponse;
         try{
             LogSuccess('[/api/users] Get all active Users Request');
-            response = await this.userRepo.findActiveUsers(page, limit);
-            return response;
+            this.setStatus(200);
+            return await this.userRepo.findActiveUsers(page, limit);
         } catch (error) {
             LogError(`in ` + JSON.stringify(error));
+            this.setStatus(400);
             return null;
         }
     }
@@ -78,13 +80,13 @@ export class UserController implements IUserController{
         @Query()page: number,
         @Query()limit: number
     ): Promise<PaginatedUserResponse | null> {
-        let response: PaginatedUserResponse;
         try{
             LogSuccess('[/api/users] Get Deleted Users Request');
-            response = await this.userRepo.findDeletedUsers(page, limit);
-            return response;
+            this.setStatus(200);
+            return await this.userRepo.findDeletedUsers(page, limit);
         } catch (error) {
             LogError(`in ` + JSON.stringify(error));
+            this.setStatus(400);
             return null;
         }
     }
@@ -101,13 +103,13 @@ export class UserController implements IUserController{
         @Query()limit: number,
         @Query()role: string
     ): Promise<PaginatedUserResponse | null> {
-        let response: PaginatedUserResponse;
         try{
             LogSuccess(`[/api/users] Get Users role: ${role}`);
-            response = await this.userRepo.findUsersByRole(role, page, limit);
-            return response;
+            this.setStatus(200);
+            return await this.userRepo.findUsersByRole(role, page, limit);
         } catch (error) {
             LogError(`[UserController -> getUsersByRole]: ${JSON.stringify(error)}`);
+            this.setStatus(400);
             return null;
         }
     }
@@ -121,18 +123,19 @@ export class UserController implements IUserController{
     public async deleteUser(
         @Path() id: string
     ): Promise<IUser | null> {
-        let response: IUser;
         try{
-            if(id){
-                response = await this.userRepo.deleteUserById(id);
+            if(id){ 
                 LogSuccess(`[/api/users] Deleted User by id: ${id}`);
-                return response;
+                this.setStatus(200);
+                return await this.userRepo.deleteUserById(id);
             } else{
                 LogInfo(`[/api/users] No id provided`);
+                this.setStatus(400);
                 return null;
             }
         } catch (error) {
             LogError(`in ` + JSON.stringify(error));
+            this.setStatus(400);
             return null;
         }
     }
@@ -154,13 +157,16 @@ export class UserController implements IUserController{
 
             if (!userExist) {
                 LogInfo("The user dosnt exist.");
+                this.setStatus(400);
                 return null;
             }
             const updated = await this.userRepo.updateUser(update, id);
             LogSuccess(`User updated: ${id}`);
+            this.setStatus(200);
             return updated;
         }catch {
             LogInfo(`[/api/users] Error updating user: ${id}`);
+            this.setStatus(400);
             return null;
         }
     }
