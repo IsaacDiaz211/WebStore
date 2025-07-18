@@ -9,8 +9,8 @@ import Consultation from "./pages/Consultation.tsx";
 import Perfil from "./pages/Profile.tsx";
 import SignIn from "./pages/SignIn.tsx";
 import Login from "./pages/LogIn.tsx";
+import Pay from "./pages/Pay.tsx";
 import AppLayout from "./layouts/AppLayout.tsx";
-import SideMenu from "./components/SideMenu";
 
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
                   <Route path="/iniciar-sesion" element={<Login />} />
                   <Route path="/producto/:id" element={<InfoProduct />} />
                   {/*<Route path="/producto/:id" element={<InfoProduct />} /> */}
+                  <Route path="/pagar" element={<Pay />} />
               </Routes>
             </AppLayout>
           </Router>

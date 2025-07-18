@@ -1,40 +1,28 @@
-import { Container, Row, Col } from "react-bootstrap";
-import CardLarge from "../components/CardLarge";
-import CardMedium
- from "../components/CardMedium";
+import ProjectDetailsCard from "../components/ProjectDetailsCard";
+import TimelineCard from "../components/TimeLineCard";
+import QuoteCard from "../components/QuoteCard";
+import { makeStyles } from "@fluentui/react-components";
+
+const useStyles = makeStyles({
+  page: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "2rem",
+    padding: "2rem",
+  },
+});
+
 const AboutUs = () => {
+    const styles = useStyles();
 
-    const info: {title: string, text: string}[] = [
-        {
-            title: "Nuestra vision",
-            text: "/",
-        },
-        {
-            title: "Nuestra misión",
-            text: "/",
-        },
-    ];
-    return (
-        <>
-            <Container className="hero-fullscrean">
-                <h2>Sobre nosotros</h2>
-                <Row>
-                    <Col>
-                        <CardLarge title={info[0].title} text={info[0].text}/>
-                        <CardMedium title={info[1].title} text={info[1].text}/>
-                        <CardMedium title={info[1].title} text={info[1].text}/>
-                    </Col>
-                    <Col>
-                        <CardLarge title={info[0].title} text={info[0].text}/>
-                        <CardMedium title={info[1].title} text={info[1].text}/>
-                        <CardMedium title={info[1].title} text={info[1].text}/>
-                    </Col>
-                </Row>
-            </Container>
-        </>
-    )
-    
-
+    return(
+        <div className={styles.page}>
+        <ProjectDetailsCard />
+        <TimelineCard />
+        <QuoteCard />
+      </div>
+    );
 };
 
 export default AboutUs;

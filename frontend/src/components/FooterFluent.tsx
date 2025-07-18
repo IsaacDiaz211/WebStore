@@ -47,7 +47,7 @@ const FooterFluent = () => {
         <div className={styles.column}>
           <Link to="/" className={styles.link}>Inicio</Link>
           <Link to="/catalogo" className={styles.link}>Catálogo</Link>
-          <Link to="/catalogo" className={styles.link}>Más vendidos</Link>
+          <Link to="/pagar" className={styles.link}>Más vendidos</Link>
         </div>
 
         {/* Columna 2 */}
@@ -61,7 +61,7 @@ const FooterFluent = () => {
         <div className={styles.column}>
           <span className={styles.link}>Av. Ávalos 400, Resistencia, Chaco</span>
           <span className={styles.link}>+54 3728-129433</span>
-          <span className={styles.link}>consultas@soundscape.com</span>
+          <span className={styles.link}>consultas@shuandbooks.com</span>
         </div>
       </div>
 

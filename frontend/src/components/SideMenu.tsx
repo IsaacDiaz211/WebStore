@@ -159,7 +159,10 @@ const SideMenu = () => {
           </NavItem>
 
           <NavSectionHeader>Compras</NavSectionHeader>
-          <NavItem icon={<TrainingPrograms />} value="15">
+          <NavItem 
+            icon={<TrainingPrograms />} 
+            href={"/carrito"}
+            value="15">
             Carrito
           </NavItem>
           <NavCategory value="16">
