@@ -68,8 +68,10 @@ export class AuthController extends Controller implements IAuthController{
   async login(@Body() body: LoginInput): Promise<LoginResponse> {
     //const { email, password } = req.body;
     try {
+      LogInfo(`Body recibido: ${body}`); // Debug
       const user = await this.userRepo.findByEmail(body.email);
       if (!user){
+        LogError(`User not found`);
         this.setStatus(400);
         return {
           message: 'Invalid credentials',
@@ -78,12 +80,14 @@ export class AuthController extends Controller implements IAuthController{
       }
       const isMatch = await comparePassword(body.password, user.password);
       if (!isMatch) {
+        LogError(`Invalid credentials`);
         this.setStatus(400);
         return {
           message: 'Invalid credentials',
           token: null
         }
       } else {
+        LogInfo(`User found: ${user.email}`);
         const tokenLogin = jwt.sign(
           { id: user._id, role: user.role },  // Datos del usuario a incluir en el token (payload)
           process.env.SECRETKEY || 'secret_fallback', // Clave secreta para firmar el token

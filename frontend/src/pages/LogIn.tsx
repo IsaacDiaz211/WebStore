@@ -1,5 +1,6 @@
 import { useState } from "react";
 import LogInCard from "../components/LogInCard";
+import LogInFluent from "../components/LogInFluent";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 const LogIn=() => {
     const [email, setEmail] = useState('');
-    const [pass, setPassword] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -29,7 +30,7 @@ const LogIn=() => {
             /*
              Acá hago uso de axios, recomendación de DeepSeek. Aún no lo entiendo bien, así que queda pendiente para aprender.
             */
-            const response = await axios.post('/api/auth/login', { email, password: pass })
+            const response = await axios.post('/api/auth/login', { email: email, password: password })
 
             const { token, user } = response.data;
 
@@ -51,12 +52,12 @@ const LogIn=() => {
     return (
         <div className="login-view">
             <h2>Iniciar Sesión</h2>
-            <LogInCard 
+            <LogInFluent 
                 email={email}
-                pass={pass}
+                password={password}
                 error={error}
                 onEmailChange={setEmail}
-                onPassChange={setPassword}
+                onPasswordChange={setPassword}
                 onSubmit={handleSubmit}
             />
         </div>
