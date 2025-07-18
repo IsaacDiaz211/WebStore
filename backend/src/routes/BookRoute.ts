@@ -10,9 +10,12 @@ bookRoute.route('/')
     .post(upload.fields([
         { name: 'imageCover', maxCount: 1 },
         { name: 'imageBack', maxCount: 1 }]),
-        async(req: Request, res: Response) => {
+        async(req: Request, res: Response): Promise<void> => {
             LogInfo('Llegamos al router');
-            controller.createBook(req, res);
-});
+            const result = controller.createBook(req);
+            res.json(result);
+        }
+    );
+
 
 export default bookRoute;

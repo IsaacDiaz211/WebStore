@@ -104,3 +104,5 @@ de archivo único, como parte del public_id, evitando colisiones entre imágenes
 tener el mismo nombre original.
 
 # FrontEnd
+
+## Fluent 2
