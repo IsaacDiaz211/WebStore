@@ -35,7 +35,17 @@ a esto:
 Similar con checkRole.ts.
 Estos cambios resuelven los errores de incompatibilidad de tipos que surgían al usar los
 middlewares en las rutas de Express, asegurando que las funciones de middleware se comporten
-como se espera en términos de flujo de control y tipos de retorno.        
+como se espera en términos de flujo de control y tipos de retorno.  
+
+### Error al incluir 'Bearer' en axios
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    //config.headers.Authorization = `Bearer ${token}`; <-- No funciona
+    config.headers.Authorization = `${token}`;          <-- Sí funciona
+  }
+  return config;
+});
 
 ## Códigos de estado en HTTP en Status 
 ¿Qué son los códigos de estado HTTP?
@@ -106,3 +116,5 @@ tener el mismo nombre original.
 # FrontEnd
 
 ## Fluent 2
+
+## Axios

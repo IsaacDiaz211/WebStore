@@ -1,7 +1,7 @@
 import { useState } from "react";
 import LogInCard from "../components/LogInCard";
 import LogInFluent from "../components/LogInFluent";
-import axios from "axios";
+import api from '../utils/axios.config';
 import { useNavigate } from "react-router-dom";
 
 /*
@@ -30,14 +30,15 @@ const LogIn=() => {
             /*
              Acá hago uso de axios, recomendación de DeepSeek. Aún no lo entiendo bien, así que queda pendiente para aprender.
             */
-            const response = await axios.post('/api/auth/login', { email: email, password: password })
+            const response = await api.post('/auth/login', { email: email, password: password })
 
             const { token, user } = response.data;
 
             // Guarda el token en localStorage
             localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user));
             console.log('Login exitoso:', user);
-            
+
             // Redirige al usuario al perfil
             navigate('/perfil');
 

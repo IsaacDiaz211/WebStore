@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client'
 import { FluentProvider, webLightTheme } from '@fluentui/react-components';
 import { createDarkTheme, createLightTheme } from '@fluentui/react-components';
 import type { BrandVariants, Theme } from '@fluentui/react-components';
-import "bootstrap/dist/css/bootstrap.min.css"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import './index.css'
 import App from './App.tsx'
 
@@ -38,11 +38,15 @@ const shuAndBooksTheme: BrandVariants = {
 darkTheme.colorBrandForeground1 = shuAndBooksTheme[110];
 darkTheme.colorBrandForeground2 = shuAndBooksTheme[120];
 
+const queryClient = new QueryClient();
+
 const root = createRoot(document.getElementById('root')!);
 
 root.render(
   <FluentProvider theme={lightTheme}>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </FluentProvider>,
 );
 /* The old version

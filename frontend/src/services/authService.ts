@@ -1,7 +1,8 @@
 import axios from 'axios';
+import api from '../utils/axios.config';
 
 export const login = (email: string, password: string) => {
-  return axios.post('/auth/login', { email, password });
+  return api.post('/auth/login', { email, password });
 };
 
 export const register = (data: {
@@ -10,5 +11,5 @@ export const register = (data: {
   email: string;
   password: string;
 }) => {
-  return axios.post('/auth/register', data);
+  return api.post('/auth/register', data);
 };

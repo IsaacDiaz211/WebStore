@@ -1,4 +1,5 @@
 import express, {Request, Response} from "express";
+import cors from 'cors';
 import { UserController } from "../controllers/UserController"
 import { LogInfo } from "../utils/logger";
 import { verifyToken } from '../middlewares/verifyToken';
@@ -7,7 +8,7 @@ import { checkRole } from '../middlewares/checkRole';
 let userRouter: express.Router = express.Router();
 
 userRouter.route('/')
-    .get(verifyToken, checkRole('admin'), async (req: Request, res: Response) => {
+    .get(verifyToken, checkRole('admin'), cors(), async (req: Request, res: Response) => {
         let id: any = req?.query?.id;
         let page: any = req?.query.page || 1;
         let max: any = req?.query.page || 5;

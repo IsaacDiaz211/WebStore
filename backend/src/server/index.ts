@@ -37,26 +37,9 @@ const swaggerHTML = swaggerUi.generateHTML(undefined, {
     },
 });
 
-// Servir Swagger UI
-server.use("/docs", swaggerUi.serve);
-server.get("/docs", (req, res) => {
-    res.send(swaggerHTML);
-});
-
-
-
 //server.use(bodyParser.json()); // Para parsear application/json
 server.use(express.urlencoded({ extended: true, limit: "50mb" }));
 server.use(express.json({limit: "50mb"}));
-
-server.use(
-    '/api',
-    routes);
-//Static server
-server.use(express.static('public'));
-
-server.use(helmet());
-//server.use(cors());
 
 // Habilita CORS para todas las rutas. Esto me impedía consumir la api desde react
 //veremos cómo funciona
@@ -67,6 +50,21 @@ server.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true // Si usas cookies o tokens
 }));
+
+// Servir Swagger UI
+server.use("/docs", swaggerUi.serve);
+server.get("/docs", (req, res) => {
+    res.send(swaggerHTML);
+});
+
+server.use(
+    '/api',
+    routes);
+//Static server
+server.use(express.static('public'));
+
+server.use(helmet());
+//server.use(cors());
 
 server.get('/', (req, res) => {
     res.redirect('/api');
