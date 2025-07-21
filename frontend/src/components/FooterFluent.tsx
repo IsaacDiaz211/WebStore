@@ -53,7 +53,7 @@ const FooterFluent = () => {
         {/* Columna 2 */}
         <div className={styles.column}>
           <Link to="/consultas" className={styles.link}>Consultas</Link>
-          <Link to="/quienes-somos" className={styles.link}>Sobre nosotros</Link>
+          <Link to="/admin-libros" className={styles.link}>Sobre nosotros</Link>
           <Link to="/admin-usuarios" className={styles.link}>Perfil</Link>
         </div>
 

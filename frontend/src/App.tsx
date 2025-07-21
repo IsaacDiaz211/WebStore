@@ -10,7 +10,8 @@ import Perfil from "./pages/Profile.tsx";
 import SignIn from "./pages/SignIn.tsx";
 import Login from "./pages/LogIn.tsx";
 import Pay from "./pages/Pay.tsx";
-import CrudUser from "./pages/Admin/CRUDUser.tsx";
+import CrudUser from "./pages/admin/CrudUser.tsx";
+import CrudBook from "./pages/admin/CrudBook.tsx";
 import AppLayout from "./layouts/AppLayout.tsx";
 
 
@@ -33,6 +34,7 @@ function App() {
                   {/*<Route path="/producto/:id" element={<InfoProduct />} /> */}
                   <Route path="/pagar" element={<Pay />} />
                   <Route path="/admin-usuarios" element={<CrudUser />} />
+                  <Route path="/admin-libros" element={<CrudBook />} />
               </Routes>
             </AppLayout>
           </Router>

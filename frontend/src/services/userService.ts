@@ -1,4 +1,3 @@
-// src/services/userService.ts
 import api from '../utils/axios.config';
 import { User } from "../types/user";
 
