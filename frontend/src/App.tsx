@@ -12,6 +12,8 @@ import Login from "./pages/LogIn.tsx";
 import Pay from "./pages/Pay.tsx";
 import CrudUser from "./pages/admin/CrudUser.tsx";
 import CrudBook from "./pages/admin/CrudBook.tsx";
+import CrudCategory from "./pages/admin/CrudCategory.tsx";
+import CrudPayMethod from "./pages/admin/CrudPayMethod.tsx";
 import AppLayout from "./layouts/AppLayout.tsx";
 
 
@@ -35,6 +37,8 @@ function App() {
                   <Route path="/pagar" element={<Pay />} />
                   <Route path="/admin-usuarios" element={<CrudUser />} />
                   <Route path="/admin-libros" element={<CrudBook />} />
+                  <Route path="/admin-categorias" element={<CrudCategory />} />
+                  <Route path="/admin-medios-de-pago" element={<CrudPayMethod />} />
               </Routes>
             </AppLayout>
           </Router>

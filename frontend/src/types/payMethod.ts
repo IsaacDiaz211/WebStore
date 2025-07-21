@@ -1,2 +1,6 @@
-// src/types/payment.ts
-export type PayMethod = "card" | "transfer" | "qr" | "crypto";
+export type PayMethod = {
+    _id: string,
+    name: string | "card" | "transfer" | "qr" | "crypto";
+    surcharge: number,
+    isActive: boolean,
+} 

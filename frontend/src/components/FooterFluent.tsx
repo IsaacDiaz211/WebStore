@@ -55,6 +55,8 @@ const FooterFluent = () => {
           <Link to="/consultas" className={styles.link}>Consultas</Link>
           <Link to="/admin-libros" className={styles.link}>Sobre nosotros</Link>
           <Link to="/admin-usuarios" className={styles.link}>Perfil</Link>
+          <Link to="/admin-categorias" className={styles.link}>Categorias</Link>
+          <Link to="/admin-medios-de-pago" className={styles.link}>Medios de Pago</Link>
         </div>
 
         {/* Columna 3 */}
