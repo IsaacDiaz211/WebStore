@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getBooks, createBook, updateBook, deleteBook } from "../../services/bookService";
+import { getCategories } from "../../services/categoryService";
 import { Book } from "../../types/book";
 import CrudLayout from "../../components/CRUD/CrudLayout";
 import CrudModal from "../../components/CRUD/CrudModal";
@@ -15,6 +16,10 @@ const CrudBook = () => {
   const { data: books = [], isLoading } = useQuery({
     queryKey: ["books"],
     queryFn: getBooks,
+  });
+  const { data: categories = [] } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
   });
 
   const createMutation = useMutation({
@@ -93,7 +98,10 @@ const CrudBook = () => {
             setEditingBook((prev) => ({
               ...(prev ?? {}),
               [field]: value,
-            }))} />
+            }))
+          }
+          allCategories={categories}
+            />
       </CrudModal>
     </>
   );

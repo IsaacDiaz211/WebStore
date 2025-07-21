@@ -10,7 +10,14 @@ type PaginatedUserResponse = {
 
 export const getBooks = async (): Promise<Book[]> => {
   const res = await api.get("/books");
-  return res.data.books;
+  //Hacemos esto porque las categorias están dentro de cada libro por ids.
+  return res.data.map((book: any) => ({
+    ...book,
+    categories: book.categories.map((cat: any) => ({
+      id: cat._id,
+      name: cat.name
+    }))
+  }));
 };
 
 export const createBook = async (book: Partial<Book>): Promise<Book> => {

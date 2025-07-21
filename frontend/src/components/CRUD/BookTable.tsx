@@ -5,6 +5,7 @@ import {
   TableHeaderCell,
   TableBody,
   TableCell,
+  Tag,
   Button,
   Text,
   Card,
@@ -13,13 +14,13 @@ import {
 } from "@fluentui/react-components";
 import { Book } from "../../types/book";
 
-interface Props {
+interface TableProps {
   books: Book[];
   onEdit: (book: Book) => void;
   onDelete: (id: string) => void;
 }
 
-const BookTable = ({ books, onEdit, onDelete }: Props) => (
+const BookTable = ({ books, onEdit, onDelete }: TableProps) => (
   <Card>
     <CardHeader header={<Text weight="semibold">Libros</Text>} />
     <Table>
@@ -48,7 +49,15 @@ const BookTable = ({ books, onEdit, onDelete }: Props) => (
             <TableCell>{book.author}</TableCell>
             <TableCell>{book.language}</TableCell>
             <TableCell>{book.stock}</TableCell>
-            <TableCell>{book.categories}</TableCell>
+            <TableCell>
+              <div style={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>
+                {book.categories.map((category, index) => (
+                  <Tag key={index} appearance="filled">
+                    {category.name}
+                  </Tag>
+                ))}
+              </div>
+            </TableCell>
             <TableCell>{book.imageCover}</TableCell>
             <TableCell>{book.imageBack}</TableCell>
             <TableCell>{book.isActive ? "Activo" : "Inactivo"}</TableCell>
