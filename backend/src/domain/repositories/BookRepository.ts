@@ -5,7 +5,7 @@ import { Types } from 'mongoose';
 import Partial  from 'mongoose';
 
 export class BookRepository {
-    async create(bookData: Partial<IBook>) {
+    public async create(bookData: Partial<IBook>) {
         console.log(`[BookRepository]: Creating book`);
         const book = new Book(bookData);
         return await book.save();

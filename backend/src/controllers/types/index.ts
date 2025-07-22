@@ -6,6 +6,8 @@
 
 import { IUser } from "domain/interfaces/IUser";
 import { IBook } from "domain/interfaces/IBook";
+import { ICategory } from "domain/interfaces/ICategory";
+import { IPayMethod } from "domain/interfaces/IPayMethod";
 
 
 export type BasicResponse = {
@@ -53,6 +55,18 @@ export type BookResponse = {
 }
 export type PaginatedBooksResponse = {
     books: IBook[],
+    totalPages: number,
+    currentPage: number
+}
+
+export type PaginatedCategoriesResponse = {
+    categories: ICategory[],
+    totalPages: number,
+    currentPage: number
+}
+
+export type PaginatedPayMethodsResponse = {
+    payMethods: IPayMethod[] | null,
     totalPages: number,
     currentPage: number
 }

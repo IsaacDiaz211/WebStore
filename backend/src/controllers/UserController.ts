@@ -1,5 +1,4 @@
 import { Body, Controller, Delete, Get, Path, Put, Query, Route, Tags } from "tsoa";
-import { Request } from "express";
 import { PaginatedUserResponse } from "../controllers/types/index";
 import { IUserController } from "../controllers/interfaces";
 import { IUser } from "../domain/interfaces/IUser";

@@ -102,6 +102,48 @@ Un poco más lento, pero para proyectos pequeños o educativos está más que bi
 
 ## Paginación
 
+El método `findAll` implementa paginación para consultar usuarios de una base de datos MongoDB
+usando Mongoose. Aquí está el desglose:
+
+1. Parámetros de entrada:
+   - `page`: Número de página actual (empezando desde 1)
+   - `max`: Cantidad máxima de resultados por página
+
+2. Estructura de respuesta:
+   ```typescript
+   type PaginatedUserResponse = {
+     users: IUser[];    // Lista de usuarios en la página actual
+     totalPages: number; // Total de páginas disponibles
+     currentPage: number // Página actual
+   }
+   ```
+
+3. Lógica de paginación:
+
+   - `limit(max)`: Limita los resultados a `max` documentos por consulta
+   - `skip((page - 1) * max)`: Salta los documentos de las páginas anteriores
+     - Ejemplo: Si `page=2` y `max=10`, salta los primeros 10 resultados
+
+4. **Cálculo del total de páginas**:
+   ```typescript
+   Math.ceil(count / max)
+   ```
+   - `count`: Total de documentos en la colección
+   - Divide por `max` y redondea hacia arriba para obtener el total de páginas
+
+Flujo completo:
+
+1. Prepara un objeto de respuesta inicial vacío
+2. Ejecuta la consulta con:
+   - `skip()` para saltar a la página correcta
+   - `limit()` para obtener solo los elementos de esa página
+3. Cuenta el total de documentos para calcular:
+   - Total de páginas disponibles
+   - Página actual
+4. Retorna la estructura paginada con:
+   - Los usuarios de la página actual
+   - Metadatos de paginación
+
 ## Cloudinary
 
 ### Módulo 'uuid'
