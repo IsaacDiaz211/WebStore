@@ -152,19 +152,20 @@ export class UserController extends Controller implements IUserController{
     ): Promise<IUser | null> {
         try{
             LogInfo(`[UserController -> updateUser] Updating user: ${id}`);
-            const userExist = await this.userRepo.findByEmail(update.email ?? "");
-
+            const userExist = await this.userRepo.findById(id); //findByEmail(update.email ?? "");
+            
             if (!userExist) {
                 LogInfo("The user dosnt exist.");
                 this.setStatus(400);
                 return null;
             }
+            LogInfo(`User exist: ${userExist?.name}`);
             const updated = await this.userRepo.updateUser(update, id);
             LogSuccess(`User updated: ${id}`);
             this.setStatus(200);
             return updated;
-        }catch {
-            LogInfo(`[/api/users] Error updating user: ${id}`);
+        }catch (error){
+            LogInfo(`[/api/users] Error updating user: ` + JSON.stringify(error));
             this.setStatus(400);
             return null;
         }

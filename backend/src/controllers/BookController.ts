@@ -74,6 +74,7 @@ export class BookController extends Controller implements IBookController{
             };
         } catch (error) {
             LogError('in: ' + JSON.stringify(error));
+            this.setStatus(400);
             return { 
                     book: null,
                     id: null,
@@ -215,7 +216,7 @@ export class BookController extends Controller implements IBookController{
         try{
             LogInfo('Deleting book');
             this.setStatus(200);
-            return await this.bookRepo.deleteBookById(id);
+            return await this.bookRepo.deleteBook(id);
         } catch (error){
             LogError('in:'+ JSON.stringify(error));
             this.setStatus(400);

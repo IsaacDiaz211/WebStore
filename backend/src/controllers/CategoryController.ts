@@ -24,6 +24,7 @@ export class CategoryController extends Controller implements ICategoryControlle
             return newCate;
         } catch (error) {
             LogError(`in Creating Category: ` + JSON.stringify(error));
+            this.setStatus(400);
             return null;
         }
     }
@@ -32,8 +33,7 @@ export class CategoryController extends Controller implements ICategoryControlle
         try {
             if (id) {
                 LogSuccess(`[/api/categories] Get Category By ID: ${id}`);
-                //response = await CategoryRepository.getCategoryById(id);
-                return null;
+                return await this.cateRepo.findById(id);
             } else {
                 LogSuccess('[/api/categories] Get All Categories Request');
                 return await this.cateRepo.findAll(page, limit);

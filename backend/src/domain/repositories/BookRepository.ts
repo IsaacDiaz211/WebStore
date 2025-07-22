@@ -101,12 +101,13 @@ export class BookRepository {
         return await Book.findByIdAndUpdate(id, bookData);
     }
 
-    public async deleteBookById(id: string){
+    public async deleteBook(id: string){
         let book = await Book.findById(id);
         if(!book){
             return null;
         }
         book.deleted = true;
-        return await book.save();
+        book.save();
+        return await book;
     }
 };

@@ -28,6 +28,9 @@ export class CategoryRepository {
         });
         return response;
     }
+    public async findById(id: string){
+        return await Category.findById(id);
+    }
     public async updateCategory(id: string, categoryData: Partial<ICategory>){
         return await Category.findByIdAndUpdate(id, categoryData);
     }
