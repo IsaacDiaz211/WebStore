@@ -28,6 +28,46 @@ export class CategoryRepository {
         });
         return response;
     }
+    public async findActive(page: number, max: number){
+        let response: PaginatedCategoriesResponse = {
+            categories: [],
+            totalPages: 1,
+            currentPage: page
+        };
+        await Category.find({deleted: false})
+            .limit(max)
+            .skip((page - 1) * max)
+            .exec().then((categories: ICategory[]) => {
+                response.categories = categories;
+            });
+        await Category.countDocuments().exec().then((count: number) => {
+            let totalPages = Math.ceil(count / max);
+            let currentPage = page;
+            response.totalPages = totalPages;
+            response.currentPage = currentPage;
+        });
+        return response;
+    }
+    public async findDeleted(page: number, max: number){
+        let response: PaginatedCategoriesResponse = {
+            categories: [],
+            totalPages: 1,
+            currentPage: page
+        };
+        await Category.find({deleted: true})
+            .limit(max)
+            .skip((page - 1) * max)
+            .exec().then((categories: ICategory[]) => {
+                response.categories = categories;
+            });
+        await Category.countDocuments().exec().then((count: number) => {
+            let totalPages = Math.ceil(count / max);
+            let currentPage = page;
+            response.totalPages = totalPages;
+            response.currentPage = currentPage;
+        });
+        return response;
+    }
     public async findById(id: string){
         return await Category.findById(id);
     }

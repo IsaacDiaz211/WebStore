@@ -69,4 +69,25 @@ export class CategoryController extends Controller implements ICategoryControlle
             return null;
         }
     }
+
+    public async getActiveCategories(page: number, limit: number): Promise<PaginatedCategoriesResponse | null>{
+        try {
+            LogInfo('Getting active categories');
+            this.setStatus(200);
+            return await this.cateRepo.findActive(page, limit);
+        } catch (error) {
+            LogError(`[Controller ERROR]: Getting Active Categories: ${error}`);
+            return null;
+        }
+    }
+    public async getDeletedCategories(page: number, limit: number): Promise<PaginatedCategoriesResponse | null>{
+        try {
+            LogInfo('Getting deleted categories');
+            this.setStatus(200);
+            return await this.cateRepo.findDeleted(page, limit);
+        } catch (error) {
+            LogError(`[Controller ERROR]: Getting Deleted Categories: ${error}`);
+            return null;
+        }
+    }
 }

@@ -26,7 +26,7 @@ export interface IUserController {
     getDeletedUsers(page: number, limit: number): Promise<PaginatedUserResponse | null>;
     getUsersByRol(page: number, limit: number, role:string): Promise<PaginatedUserResponse | null>;
     deleteUser(id?: string): Promise<IUser | null>;
-    updateUser(id: string, req: Request): Promise<IUser | null>;
+    updateUser(id: string, update: Partial<IUser>): Promise<IUser | null>;
 }
 
 export interface IAuthController {
@@ -49,6 +49,8 @@ export interface ICategoryController{
     getCategories(page: number, limit: number, id?: string): Promise<PaginatedCategoriesResponse | ICategory | null>;
     updateCategory(id: string, req: Request): Promise<ICategory | null>;
     deleteCategory(id: string): Promise<ICategory | null>;
+    getActiveCategories(page: number, limit: number): Promise<PaginatedCategoriesResponse | null>;
+    getDeletedCategories(page: number, limit: number): Promise<PaginatedCategoriesResponse | null>;
 }
 
 export interface IPayMethodController{
@@ -56,6 +58,8 @@ export interface IPayMethodController{
     getPayMethods(page: number, limit: number, id?: string): Promise<PaginatedPayMethodsResponse| IPayMethod | null>;
     updatePayMethod(id: string, req: Request): Promise<IPayMethod | null>;
     deletePayMethod(id: string): Promise<IPayMethod | null>;
+    getActivePayMethods(page: number, limit: number): Promise <PaginatedPayMethodsResponse | IPayMethod | null>;
+    getDeletedPayMethods(page: number, limit: number): Promise <PaginatedPayMethodsResponse | null>;
 }
 
 export interface ISaleController{}

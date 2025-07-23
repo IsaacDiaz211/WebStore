@@ -167,7 +167,7 @@ export class BookController extends Controller implements IBookController{
      * @param { string } category
      * @returns
      */
-    @Get("/category/{category}")
+    @Get("/category")
     public async getBooksByCategory(
         @Query() page: number,
         @Query() limit: number,

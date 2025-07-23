@@ -57,6 +57,47 @@ bookRoute.route('/')
                 res.json(error);
             }
         }
+    );
+
+bookRoute.route('/active')
+    .get(cors(),
+        async(req: Request, res: Response): Promise<void> => {
+            try{
+                let page: any = req?.query.page || 1;
+                let max: any = req?.query.max || 5;
+                const result = await controller.getActiveBooks(page, max);
+                res.json(result);
+            } catch (error){
+                res.json(error);
+            }
+        }
+    );
+bookRoute.route('/deleted')
+    .get(verifyToken, checkRole('admin'), cors(),
+        async(req: Request, res: Response): Promise<void> => {
+            try{
+                let page: any = req?.query.page || 1;
+                let max: any = req?.query.max || 5;
+                const result = await controller.getDeletedBooks(page, max);
+                res.json(result);
+            } catch (error){
+                res.json(error);
+            }
+        }
+    );
+bookRoute.route('/category')
+    .get(cors(),
+        async(req: Request, res: Response): Promise<void> => {
+            try{
+                let page: any = req?.query.page || 1;
+                let max: any = req?.query.max || 5;
+                let id: any = req?.query.id;
+                const result = await controller.getBooksByCategory(page, max, id);
+                res.json(result);
+            } catch (error){
+                res.json(error);
+            }
+        }
     )
 
 export default bookRoute;

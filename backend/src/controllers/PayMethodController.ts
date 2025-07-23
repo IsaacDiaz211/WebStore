@@ -33,8 +33,7 @@ export class PayMethodController extends Controller implements IPayMethodControl
         try {
             if (id) {
                 LogSuccess(`[/api/paymethods] Get PayMethod By ID: ${id}`);
-                //response = await CategoryRepository.getCategoryById(id);
-                return null;
+                return await this.payRepo.findById(id);
             } else {
                 LogSuccess('[/api/paymethods] Get All PayMethods Request');
                 return await this.payRepo.findAll(page, limit);
@@ -62,6 +61,31 @@ export class PayMethodController extends Controller implements IPayMethodControl
             return await this.payRepo.deletePayMethod(id);
         } catch (error) {
             LogError(`[Controller ERROR]: Deleting PayMethod: ${error}`);
+            return null;
+        }
+    }
+
+    public async getActivePayMethods(page: number, limit: number, id?: string): Promise<PaginatedPayMethodsResponse | IPayMethod | null> {
+        try {
+            if (id) {
+                LogSuccess(`[/api/paymethods] Get PayMethod By ID: ${id}`);
+                return await this.payRepo.findById(id);
+            } else {
+                LogSuccess('[/api/paymethods] Get All PayMethods Request');
+                return await this.payRepo.findActive(page, limit);
+            }
+        } catch (error) {
+            LogError(`[Controller ERROR]: Getting PayMethods: ${error}`);
+            return null;
+        }
+    }
+
+    public async getDeletedPayMethods(page: number, limit: number): Promise<PaginatedPayMethodsResponse | null> {
+        try {
+                LogInfo('[/api/paymethods] Get All PayMethods Request');
+                return await this.payRepo.findDeleted(page, limit);
+        } catch (error) {
+            LogError(`[Controller ERROR]: Getting PayMethods: ${error}`);
             return null;
         }
     }

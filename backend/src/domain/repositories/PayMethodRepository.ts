@@ -39,4 +39,47 @@ export class PayMethodRepository {
         payMethod.deleted = true;
         return await payMethod.save(); 
     }
+    public async findActive(page: number, max: number){
+        let response: PaginatedPayMethodsResponse = {
+            payMethods: [],
+            totalPages: 1,
+            currentPage: page
+        };
+        await PayMethod.find({deleted: false})
+            .limit(max)
+            .skip((page - 1) * max)
+            .exec().then((payMethods: IPayMethod[]) => {
+                response.payMethods = payMethods;
+            });
+        await PayMethod.countDocuments().exec().then((count: number) => {
+            let totalPages = Math.ceil(count / max);
+            let currentPage = page;
+            response.totalPages = totalPages;
+            response.currentPage = currentPage;
+        });
+        return response;
+    }
+    public async findDeleted(page: number, max: number){
+        let response: PaginatedPayMethodsResponse = {
+            payMethods: [],
+            totalPages: 1,
+            currentPage: page
+        };
+        await PayMethod.find({deleted: true})
+            .limit(max)
+            .skip((page - 1) * max)
+            .exec().then((payMethods: IPayMethod[]) => {
+                response.payMethods = payMethods;
+            });
+        await PayMethod.countDocuments().exec().then((count: number) => {
+            let totalPages = Math.ceil(count / max);
+            let currentPage = page;
+            response.totalPages = totalPages;
+            response.currentPage = currentPage;
+        });
+        return response;
+    }
+    public async findById(id: string){
+        return await PayMethod.findById(id);
+    }
 }
