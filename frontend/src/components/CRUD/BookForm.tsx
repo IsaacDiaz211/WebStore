@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Combobox,
@@ -19,6 +19,8 @@ interface FormProps {
 }
 
 const BookForm = ({ book, onChange, allCategories }: FormProps) => {
+  const [previewCover, setPreviewCover] = useState<string | null>(null);
+  const [previewBack, setPreviewBack] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
   const handleAddCategory = () => {
@@ -30,10 +32,25 @@ const BookForm = ({ book, onChange, allCategories }: FormProps) => {
       setSelectedCategory("");
     }
   };
-
   const handleRemoveCategory = (id: string) => {
     onChange('categories', book.categories.filter(c => c._id !== id));
   };
+
+  const handleFileChange = (field: "imageCover" | "imageBack", file: File | null) => {
+    if (file) {
+      const preview = URL.createObjectURL(file);
+      field === "imageCover" ? setPreviewCover(preview) : setPreviewBack(preview);
+      onChange(field, file);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      previewCover && URL.revokeObjectURL(previewCover);
+      previewBack && URL.revokeObjectURL(previewBack);
+    };
+  }, [previewCover, previewBack]);
+
   return (
     <>
       <Field label="Titulo">
@@ -46,7 +63,7 @@ const BookForm = ({ book, onChange, allCategories }: FormProps) => {
       <Field label="Precio">
         <Input
           name="price"
-          value={book.price.toString() || ''}
+          value={book?.price?.toString() ?? ''}
           onChange={(_, data) => onChange('price', data.value)}
         />
       </Field>
@@ -76,13 +93,6 @@ const BookForm = ({ book, onChange, allCategories }: FormProps) => {
           name="language"
           value={book.language || ''}
           onChange={(_, data) => onChange('language', data.value)}
-        />
-      </Field>
-      <Field label="Stock">
-        <Input
-          name="stock"
-          value={book.stock?.toString() || ''}
-          onChange={(_, data) => onChange('stock', data.value)}
         />
       </Field>
       <Field label="Stock">
@@ -123,17 +133,24 @@ const BookForm = ({ book, onChange, allCategories }: FormProps) => {
         </div>
       </Field>
       <Field label="Portada">
-        <Input
+        <input
+          type="file"
+          style={{
+            display: 'block',
+            marginBottom: '8px'
+          }}
+          accept="image/*"
           name="imageCover"
           value={book.imageCover || ''}
-          onChange={(_, data) => onChange('imageCover', data.value)}
+          onChange={(e) => handleFileChange("imageCover", e.target.files?.[0] || null)}
+          {...(previewCover && {children: <img src={previewCover} alt="Portada" style={{ height: "120px", marginTop: "0.5rem" }} />})}
         />
       </Field>
       <Field label="Contratapa">
         <Input
           name="imageBack"
           value={book.imageBack || ''}
-          onChange={(_, data) => onChange('stock', data.value)}
+          onChange={(_, data) => onChange('imageBack', data.value)}
         />
       </Field>
       <Switch

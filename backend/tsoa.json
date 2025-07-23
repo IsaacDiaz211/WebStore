@@ -11,5 +11,18 @@
     "paths": {
       "domain/*": ["domain/*"]
     }
+  },
+  "swagger": {
+    "outputDirectory": "./src/swagger",
+    "entryFile": "./src/server.ts",
+    "host": "localhost:3000",
+    "basePath": "/api",
+    "schemes": ["http", "https"],
+    "specVersion": 3
+  },
+  "routes": {
+    "basePath": "/api",
+    "entryFile": "./src/server.ts",
+    "routesDir": "./src/controllers"
   }
 }

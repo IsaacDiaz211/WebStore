@@ -14,3 +14,9 @@ export type Book = {
   imageBack?: string,
   isActive: boolean;
 };
+
+export type PaginatedBooksResponse = {
+  books: Book[];
+  totalPages: number;
+  currentPage: number;
+};

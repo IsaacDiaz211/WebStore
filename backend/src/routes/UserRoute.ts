@@ -68,4 +68,16 @@ userRouter.route('/deleted')
             res.json(error);
         }
     });
+userRouter.route('/rol')
+    .get(verifyToken, async(req: Request, res: Response) => {
+        try{
+            let page: any = req?.query.page || 1;
+            let max: any = req?.query.page || 5;
+            let rol: any = req?.query.rol;
+            const result: any = await controller.getUsersByRol(page, max, rol);
+            res.json(result);
+        } catch (error){
+            res.json(error);
+        }
+    });
 export default userRouter;

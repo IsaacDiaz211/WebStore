@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { 
-  getCategories, 
+  fetchCategories, 
   createCategory, 
   updateCategory, 
   deleteCategory 
@@ -20,7 +20,7 @@ const CrudCategory = () => {
   
   const { data: categories = [], isLoading } = useQuery({
     queryKey: ["categories"],
-    queryFn: getCategories,
+    queryFn: fetchCategories,
   });
 
   const createMutation = useMutation({

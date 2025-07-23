@@ -1,5 +1,5 @@
 import api from '../utils/axios.config';
-import { PayMethod } from "../types/PayMethod";
+import { PayMethod, PaginatedPayMethodsResponse } from "../types/PayMethod";
 
 /* a implementar luego cuando se implemente la paginacion
 type PaginatedUserResponse = {
@@ -8,9 +8,9 @@ type PaginatedUserResponse = {
   currentPage: number;
 };*/
 
-export const getPayMethods = async (): Promise<PayMethod[]> => {
+export const getPayMethods = async (): Promise<PaginatedPayMethodsResponse> => {
   const res = await api.get("/paymethods");
-  return res.data.categories;
+  return res.data.payMethods;
 };
 
 export const createPayMethod = async (payMethod: Partial<PayMethod>): Promise<PayMethod> => {

@@ -146,8 +146,6 @@ Flujo completo:
 
 ## Cors
 
-## Swagger
-
 ## Cloudinary
 
 ### Módulo 'uuid'

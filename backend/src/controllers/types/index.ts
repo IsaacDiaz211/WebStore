@@ -1,9 +1,3 @@
-/**
-* Basic JSON response for Controllers
-* Los 'types' propios serán tipos complejos personalizados, de esta manera va a hacer mucho más
-* fácil controlar qué es lo que nos va a devolver por ejemplo una promesa. En vez de devolvernos un objeto de tipo any.
-*/
-
 import { IUser } from "domain/interfaces/IUser";
 import { IBook } from "domain/interfaces/IBook";
 import { ICategory } from "domain/interfaces/ICategory";
@@ -23,7 +17,7 @@ export type LoginInput = {
     email: string;
     password: string;
 }
-
+// Response type for login operations
 export type LoginResponse = {
     message: string,
     token: string | null
@@ -36,7 +30,7 @@ export interface RegisterInput {
   password: string;
   role: 'admin' | 'customer';
 }
-
+// Response type for register operations
 export type RegisterResponse ={
     message: string,
     user: IUser | null

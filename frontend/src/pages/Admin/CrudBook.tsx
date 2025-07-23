@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getBooks, createBook, updateBook, deleteBook } from "../../services/bookService";
-import { getCategories } from "../../services/categoryService";
+import { fetchBooks, createBook, updateBook, deleteBook } from "../../services/bookService";
+import { fetchCategories } from "../../services/categoryService";
 import { Book } from "../../types/book";
 import CrudLayout from "../../components/CRUD/CrudLayout";
 import CrudModal from "../../components/CRUD/CrudModal";
@@ -13,13 +13,16 @@ const CrudBook = () => {
   const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [editingBook, setEditingBook] = useState<Partial<Book>>({});
-  const { data: books = [], isLoading } = useQuery({
-    queryKey: ["books"],
-    queryFn: getBooks,
+  
+  const { data, isLoading } = useQuery({
+  queryKey: ["books"],
+  queryFn: () => fetchBooks(),
   });
+  const books = data?.books || [];
+  console.log("Libros cargados:", books);
   const { data: categories = [] } = useQuery({
     queryKey: ["categories"],
-    queryFn: getCategories,
+    queryFn: fetchCategories,
   });
 
   const createMutation = useMutation({
@@ -31,8 +34,8 @@ const CrudBook = () => {
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, book }: { id: string; book: Partial<Book> }) =>
-      updateBook(id, book),
+    mutationFn: ({ id, formData }: { id: string; formData: FormData }) =>
+      updateBook(id, formData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["books"] });
       setModalOpen(false);
@@ -64,11 +67,19 @@ const CrudBook = () => {
   };
 
   const handleSubmit = () => {
-    if (editingBook?.id) {
-      const { id, ...data } = editingBook;
-      updateMutation.mutate({ id, book: data });
+    if (!editingBook.title || !editingBook.price || !editingBook.author) return;
+
+    const formData = new FormData();
+    Object.entries(editingBook).forEach(([key, value]) => {
+      if (value instanceof File) formData.append(key, value);
+      else if (Array.isArray(value)) formData.append(key, JSON.stringify(value));
+      else if (value !== undefined && value !== null) formData.append(key, value.toString());
+    });
+
+    if (editingBook.id) {
+      updateMutation.mutate({ id: editingBook.id, formData });
     } else {
-      createMutation.mutate(editingBook as Partial<Book>);
+      createMutation.mutate(formData);
     }
   };
 
@@ -79,7 +90,18 @@ const CrudBook = () => {
         searchTerm={search}
         onSearch={setSearch}
         onNew={() => {
-          setEditingBook({});
+          setEditingBook({
+            title: "",
+            price: 0,
+            author: "",
+            editorial: "",
+            description: "",
+            language: "español",
+            stock: 0,
+            categories: [],
+            imageCover: "",
+            imageBack: "",
+          });
           setModalOpen(true);
         }}
       >

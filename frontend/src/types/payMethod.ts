@@ -4,3 +4,9 @@ export type PayMethod = {
     surcharge: number,
     isActive: boolean,
 } 
+
+export type PaginatedPayMethodsResponse = {
+    payMethods: PayMethod[],
+    totalPages: number,
+    currentPage: number
+}

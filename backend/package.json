@@ -4,7 +4,7 @@
   "description": "project in MERN",
   "main": "index.js",
   "scripts": {
-    "swagger": "tsoa spec",
+    "swagger": "tsoa spec-and-routes",
     "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"npm run swagger\" \"nodemon -q dist/index.js\"",
     "test": "jest",

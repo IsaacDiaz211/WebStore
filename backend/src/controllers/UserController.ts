@@ -20,10 +20,9 @@ export class UserController extends Controller implements IUserController{
      * Obtener todos los usuarios paginados o un usuario por ID
      * @param { number } page
      * @param { number } limit
-     * @param { string } id 
-     * @returns 
+     * @param { string } id
      */
-    @Get("/")
+    @Get("/{id}")
     public async getUsers(
         @Query()page: number, 
         @Query()limit: number, 
@@ -50,7 +49,6 @@ export class UserController extends Controller implements IUserController{
      * Obtener usuarios activos paginados
      * @param { number } page
      * @param { number } limit
-     * @returns Active users
      */
     @Get("/active")
     public async getActiveUsers(
@@ -72,7 +70,6 @@ export class UserController extends Controller implements IUserController{
      * Obtener usuarios inactivos paginados
      * @param { number } page
      * @param { number } limit
-     * @returns Deleted users
      */
     @Get("/deleted")
     public async getDeletedUsers(
@@ -96,11 +93,11 @@ export class UserController extends Controller implements IUserController{
      * @param { number } limit
      * @param { string } role
      */
-    @Get("/role")
+    @Get("/role/{role}")
     public async getUsersByRol(
         @Query()page: number,
         @Query()limit: number,
-        @Query()role: string
+        @Path()role: string
     ): Promise<PaginatedUserResponse | null> {
         try{
             LogSuccess(`[/api/users] Get Users role: ${role}`);
@@ -115,8 +112,7 @@ export class UserController extends Controller implements IUserController{
 
     /**
      * Eliminar un usuario por ID, baja lógica.
-     * @param { string } id 
-     * @returns 
+     * @param { string } id
      */
     @Delete("/{id}")
     public async deleteUser(
@@ -142,8 +138,7 @@ export class UserController extends Controller implements IUserController{
     /**
      * Actualizar usuario por ID
      * @param { string } id 
-     * @param { Request } req 
-     * @returns 
+     * @param { Request } req
      */
     @Put("/{id}")
     public async updateUser(

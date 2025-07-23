@@ -8,7 +8,7 @@ type PaginatedUserResponse = {
   currentPage: number;
 };*/
 
-export const getCategories = async (): Promise<Category[]> => {
+export const fetchCategories = async (): Promise<Category[]> => {
   const res = await api.get("/categories");
   return res.data.categories;
 };

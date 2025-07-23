@@ -21,7 +21,6 @@ export class AuthController extends Controller implements IAuthController{
   /**
    * 
    * @param { RegisterInput } body 
-   * @returns 
    */
   @Post('/register')
   async register(@Body() body: RegisterInput): Promise<RegisterResponse> {
@@ -62,7 +61,6 @@ export class AuthController extends Controller implements IAuthController{
   /**
    * 
    * @param { LoginInput } body
-   * @returns 
    */
   @Post('/login')
   async login(@Body() body: LoginInput): Promise<LoginResponse> {

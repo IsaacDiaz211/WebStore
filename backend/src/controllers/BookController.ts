@@ -21,7 +21,6 @@ export class BookController extends Controller implements IBookController{
     /**
      * 
      * @param { Request } req 
-     * @returns 
      */
     @Post("/")
     public async createBook(@Body() req: Request): Promise<BookResponse> {
@@ -88,7 +87,6 @@ export class BookController extends Controller implements IBookController{
      * @param { number } page 
      * @param { number } limit 
      * @param { string } id 
-     * @returns 
      */
     @Get("/")
     public async getBooks(

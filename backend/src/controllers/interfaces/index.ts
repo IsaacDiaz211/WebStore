@@ -40,7 +40,7 @@ export interface IBookController{
     getActiveBooks(page: number, limit: number): Promise<PaginatedBooksResponse | null>;
     getDeletedBooks(page: number, limit: number): Promise<PaginatedBooksResponse | null>;
     getBooksByCategory(page: number, limit: number, category:string): Promise<PaginatedBooksResponse | null>;
-    updateBook(id: string, req: Request): Promise<IBook | null>;
+    updateBook(id: string, update: Partial<IBook>): Promise<IBook | null>;
     deleteBook(id: string): Promise<IBook | null>;
 }
 

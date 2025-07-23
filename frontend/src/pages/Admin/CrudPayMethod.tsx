@@ -49,7 +49,7 @@ const CrudPayMethod = () => {
 
   const filteredPayMethods = useMemo(() => {
     return payMethods.filter(pm =>
-      pm.name.toLowerCase().includes(search.toLowerCase())
+      `${pm.name}`.toLowerCase().includes(search.toLowerCase())
     );
   }, [payMethods, search]);
 
