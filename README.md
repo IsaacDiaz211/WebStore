@@ -144,6 +144,10 @@ Flujo completo:
    - Los usuarios de la página actual
    - Metadatos de paginación
 
+## Cors
+
+## Swagger
+
 ## Cloudinary
 
 ### Módulo 'uuid'

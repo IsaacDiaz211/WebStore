@@ -11,6 +11,6 @@ export type Book = {
   stock: number;
   categories: Category[];
   imageCover: string,
-  imageBack: string,
+  imageBack?: string,
   isActive: boolean;
 };

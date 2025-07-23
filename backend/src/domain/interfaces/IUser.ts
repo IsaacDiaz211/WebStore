@@ -1,11 +1,11 @@
-import { Document } from'mongoose';
+import { Document } from 'mongoose';
 
-export interface IUser extends Document {
+export interface IUser {
     name?: string;
     lastname?: string;
     email: string;
     password: string;
     role: 'admin' | 'customer';
     deleted?: boolean;
-    comparePassword?: (candidatePassword: string) => Promise<boolean>;
+
   };
