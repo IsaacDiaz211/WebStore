@@ -35,7 +35,7 @@ export const createBook = async (formData: FormData) => {
   const res = await api.post("/books", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`, /**se elimino el Bearer */
     },
   });
   return res.data;

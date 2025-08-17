@@ -26,7 +26,7 @@ const CrudModal = ({
 }: CrudModalProps) => {
   return (
     <Dialog open={open} onOpenChange={(_, data) => onOpenChange(data.open)}>
-      <DialogSurface>
+      <DialogSurface style={{ minWidth: "600px", maxWidth: "900px", width: "80vw" }}>
         <DialogBody>
           <DialogTitle>{title}</DialogTitle>
           {children}

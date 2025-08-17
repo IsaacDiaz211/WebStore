@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Path, Post, Put, Query, Route, Tags } from "tsoa";
 import { Request, Response } from "express";
+import mongoose from "mongoose";
 import { BookResponse, PaginatedBooksResponse } from "../controllers/types/index";
 import { IBookController } from "../controllers/interfaces";
 import { IBook } from "domain/interfaces/IBook";
@@ -27,13 +28,18 @@ export class BookController extends Controller implements IBookController{
         try{
             LogInfo('Creating a book');
             const { title, price, description, author, editorial, language, stock } = req.body;
-            const categories = req.body.categories.split(',');
+            //const categories = req.body.categories.split(',');
             /* otra opcíon a revisar:
                 const rawCategories = req.body.categories;
                 const categories = typeof rawCategories === 'string'
                 ? rawCategories.split(',').map(id => id.trim())
                 : [];
             */
+
+            // Manejo robusto de categorías. Esto produjo muchos problemas con el frontend al crear libros
+
+            const { categories } = req.body;
+            
             const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
             if (!files.imageCover || files.imageCover.length === 0) {

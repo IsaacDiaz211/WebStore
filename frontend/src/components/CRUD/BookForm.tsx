@@ -5,6 +5,7 @@ import {
   Input,
   Option,
   Tag,
+  Textarea,
   Select,
   Switch,
   Field,
@@ -67,13 +68,17 @@ const BookForm = ({ book, onChange, allCategories }: FormProps) => {
           onChange={(_, data) => onChange('price', data.value)}
         />
       </Field>
-      <Field label="Descripcion">
-        <Select
+      
+      
+
+      <Field label="Descripción">
+        <Textarea
           name="description"
-          value={book.description || ''}
-          onChange={(_, data) => onChange('description', data.value)}
-      />
+          value={book.description || ""}
+          onChange={(_, data) => onChange("description", data.value)}
+        />
       </Field>
+
       <Field label="Autor">
         <Input
           name="author"
@@ -132,7 +137,7 @@ const BookForm = ({ book, onChange, allCategories }: FormProps) => {
           ))}
         </div>
       </Field>
-      <Field label="Portada">
+      {/*<Field label="Portada">
         <input
           type="file"
           style={{
@@ -145,7 +150,22 @@ const BookForm = ({ book, onChange, allCategories }: FormProps) => {
           onChange={(e) => handleFileChange("imageCover", e.target.files?.[0] || null)}
           {...(previewCover && {children: <img src={previewCover} alt="Portada" style={{ height: "120px", marginTop: "0.5rem" }} />})}
         />
+      </Field>*/}
+      <Field label="Portada">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => handleFileChange("imageCover", e.target.files?.[0] || null)}
+        />
+        {previewCover && (
+          <img
+            src={previewCover}
+            alt="Portada"
+            style={{ height: "120px", marginTop: "0.5rem" }}
+          />
+        )}
       </Field>
+
       <Field label="Contratapa">
         <Input
           name="imageBack"

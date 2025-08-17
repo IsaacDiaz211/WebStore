@@ -14,7 +14,7 @@ const Consultation = () => {
     const styles = useStyles();
     return (
         <div className={styles.wrapper}>
-            <h2>Bienvenido a Consultas</h2>;
+            <h2>Bienvenido a Consultas</h2>
             <ConsultationCard />
         </div>
     )

@@ -71,11 +71,21 @@ const CrudBook = () => {
 
     const formData = new FormData();
     Object.entries(editingBook).forEach(([key, value]) => {
-      if (value instanceof File) formData.append(key, value);
-      else if (Array.isArray(value)) formData.append(key, JSON.stringify(value));
-      else if (value !== undefined && value !== null) formData.append(key, value.toString());
-    });
+      if (value instanceof File){
+         formData.append(key, value);
+      } else if (Array.isArray(value)){
+        if (key === "categories") {
+          // Solo enviamos los IDs de las categorías, acá el error era que pasabamos todo el objeto Category y solo necesitamos el id de la categoría
 
+          const ids = value.map((cat: any) => cat._id);
+          ids.forEach((id: string) => formData.append("categories[]", id));
+        } else {
+          formData.append(key, JSON.stringify(value));
+        }
+      } else if (value !== undefined && value !== null){
+         formData.append(key, value.toString());
+      }
+    });
     if (editingBook.id) {
       updateMutation.mutate({ id: editingBook.id, formData });
     } else {
