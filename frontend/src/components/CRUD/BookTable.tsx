@@ -1,4 +1,5 @@
 import {
+  Image,
   Table,
   TableHeader,
   TableRow,
@@ -20,13 +21,15 @@ interface TableProps {
   onDelete: (id: string) => void;
 }
 
+
 const BookTable = ({ books, onEdit, onDelete }: TableProps) => (
   <Card>
     <CardHeader header={<Text weight="semibold">Libros</Text>} />
-    <Table>
+    <div style={{ overflowX: "auto" }}>
+      <Table style={{ minWidth: "1200px" }}>
       <TableHeader>
         <TableRow>
-          <TableHeaderCell>Título</TableHeaderCell>
+          <TableHeaderCell className="sticky-col left-col">Título</TableHeaderCell>
           <TableHeaderCell>Precio</TableHeaderCell>
           <TableHeaderCell>Descripción</TableHeaderCell>
           <TableHeaderCell>Autor</TableHeaderCell>
@@ -35,9 +38,9 @@ const BookTable = ({ books, onEdit, onDelete }: TableProps) => (
           <TableHeaderCell>Stock</TableHeaderCell>
           <TableHeaderCell>Categorias</TableHeaderCell>
           <TableHeaderCell>Portada</TableHeaderCell>
-          <TableHeaderCell>Contratapa</TableHeaderCell>
+          <TableHeaderCell >Contratapa</TableHeaderCell>
           <TableHeaderCell>Estado</TableHeaderCell>
-          <TableHeaderCell>Acciones</TableHeaderCell>
+          <TableHeaderCell className="sticky-col left-col">Acciones</TableHeaderCell>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -47,6 +50,8 @@ const BookTable = ({ books, onEdit, onDelete }: TableProps) => (
             <TableCell>{book.price}</TableCell>
             <TableCell>{book.description}</TableCell>
             <TableCell>{book.author}</TableCell>
+            <TableCell>{book.editorial}</TableCell>
+
             <TableCell>{book.language}</TableCell>
             <TableCell>{book.stock}</TableCell>
             <TableCell>
@@ -58,9 +63,29 @@ const BookTable = ({ books, onEdit, onDelete }: TableProps) => (
                 ))}
               </div>
             </TableCell>
-            <TableCell>{book.imageCover}</TableCell>
-            <TableCell>{book.imageBack}</TableCell>
-            <TableCell>{book.isActive ? "Activo" : "Inactivo"}</TableCell>
+            <TableCell>        
+              <div style={{ padding: '8px' }}>
+                <Image
+                  shape="rounded"
+                  src={book.imageCover}
+                  height={90}
+                  width={90}
+                />
+              </div> 
+            </TableCell>
+            <TableCell>
+                <div style={{ padding: '8px 15px' }}>
+                <Image
+                  shape="rounded"
+                  src={book.imageBack}
+                  height={90}
+                  width={90}
+                />
+              </div>
+            </TableCell>
+            <TableCell style={{ paddingLeft: "35px" }}>
+              {book.isActive ? "Activo" : "Inactivo"}
+            </TableCell>
             <TableCell>
               <div style={{ display: "flex", gap: "8px" }}>
                 <Button size="small" onClick={() => onEdit(book)}>
@@ -80,6 +105,7 @@ const BookTable = ({ books, onEdit, onDelete }: TableProps) => (
         ))}
       </TableBody>
     </Table>
+    </div>
     <CardFooter>
       <Text size={200} color="brand">
         {books.length} libros encontrados
