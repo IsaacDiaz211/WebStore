@@ -28,13 +28,6 @@ export class BookController extends Controller implements IBookController{
         try{
             LogInfo('Creating a book');
             const { title, price, description, author, editorial, language, stock } = req.body;
-            //const categories = req.body.categories.split(',');
-            /* otra opcíon a revisar:
-                const rawCategories = req.body.categories;
-                const categories = typeof rawCategories === 'string'
-                ? rawCategories.split(',').map(id => id.trim())
-                : [];
-            */
 
             // Manejo robusto de categorías. Esto produjo muchos problemas con el frontend al crear libros
 

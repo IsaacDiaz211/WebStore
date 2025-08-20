@@ -1,8 +1,9 @@
-import { ProductCard } from "../components/Product";
-import { Book } from "../types/book";
+import ProductCard  from "../components/ProductCard";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { fetchActiveBooks } from "../services/bookService";
 import { makeStyles } from "@fluentui/react-components";
-import  FilterCard  from "../components/FilterCard";
-import  SortBy  from "../components/SortBy";
+//import  FilterCard  from "../components/FilterCard";
+//import  SortBy  from "../components/SortBy";
 
 const useStyles = makeStyles({
   layout: {
@@ -23,67 +24,22 @@ const useStyles = makeStyles({
   },
 });
 
-const dummyProducts: Book[] = [
-  {
-    id: "1",
-    title: "Romeo y Julieta",
-    image: "https://via.placeholder.com/300x200?text=Guitar",
-    price: 499,
-  },
-  {
-    id: "2",
-    title: "Tópicos de Ingeniería de Software",
-    image: "https://via.placeholder.com/300x200?text=Drums",
-    price: 799,
-  },
-  {
-    id: "3",
-    title: "Los versos satánicos",
-    image: "https://via.placeholder.com/300x200?text=Piano",
-    price: 899,
-  },
-];
 
 export const Catalogue = () => {
   const styles = useStyles();
-
+  const { data, isLoading } = useQuery({
+  queryKey: ["books"],
+  queryFn: () => fetchActiveBooks(),
+  });
+  const books = data?.books || [];
+  console.log("Libros cargados:", books);
   return (
-    <div className={styles.layout}>
-      <div className={styles.sidebar}>
-        <FilterCard />
-      </div>
-
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <SortBy />
-        <div className={styles.grid}>
-          {dummyProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </div>
+    <div className={styles.grid}>
+      {books.map((books) => (
+        <ProductCard {...books} />
+      ))}
     </div>
-    
   );
 };
 
 export default Catalogue;
-
-/**<div className={styles.grid}>
-      {dummyProducts.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </div> 
-    <div className={styles.layout}>
-        <div className={styles.sidebar}>
-          <FilterCard />
-        </div>
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "1rem" }}></div>
-          <SortBy />
-          <div className={styles.grid}>
-            
-            {dummyProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-          
-      </div>*/
