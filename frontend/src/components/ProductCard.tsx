@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardFooter, Image, Text } from "@fluentui/react-components";
+import { Button, Card, CardHeader, CardFooter, Image, Text } from "@fluentui/react-components";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { breakpoints } from "../types/Breakpoints";
 import { Book } from "../types/book";
@@ -24,8 +24,9 @@ const ProductCard = ( product: Book) => {
 
       <CardFooter>
         <Text size={200} color="brand">
-          {isCompact ? `$${product.price}` : "Comprar ahora"}
+          `$${product.price}`
         </Text>
+        <Button>Comprar ahora</Button>
       </CardFooter>
     </Card>
   );
