@@ -1,5 +1,5 @@
 import api from '../utils/axios.config';
-import { PayMethod, PaginatedPayMethodsResponse } from "../types/PayMethod";
+import { PayMethod, PaginatedPayMethodsResponse } from "../types/payMethod";
 
 /* a implementar luego cuando se implemente la paginacion
 type PaginatedUserResponse = {

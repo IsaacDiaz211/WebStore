@@ -5,7 +5,6 @@ import {
   Body1,
   Caption1,
 } from "@fluentui/react-components";
-import { useState } from "react";
 import { Book } from "../types/book";
 
 const useStyles = makeStyles({

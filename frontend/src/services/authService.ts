@@ -1,4 +1,4 @@
-import axios from 'axios';
+//import axios from 'axios';
 import api from '../utils/axios.config';
 
 export const login = (email: string, password: string) => {

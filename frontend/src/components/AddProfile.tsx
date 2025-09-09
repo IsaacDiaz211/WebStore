@@ -28,7 +28,6 @@ const AddProfile = ({
   onPasswordChange,
   onNameChange,
   onLastNameChange,
-  onSubmit,
 }: ProfileProps) => {
   return (
     <Form>

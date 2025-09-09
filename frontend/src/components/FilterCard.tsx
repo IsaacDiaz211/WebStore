@@ -6,7 +6,6 @@ import {
   Checkbox,
   makeStyles,
   Body1Strong,
-  Body1,
   Switch,
 } from "@fluentui/react-components";
 import React from "react";

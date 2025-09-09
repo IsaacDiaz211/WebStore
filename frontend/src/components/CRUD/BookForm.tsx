@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Button,
   Combobox,
@@ -6,7 +6,6 @@ import {
   Option,
   Tag,
   Textarea,
-  Select,
   Switch,
   Field,
 } from '@fluentui/react-components';

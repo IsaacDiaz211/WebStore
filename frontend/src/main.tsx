@@ -1,7 +1,6 @@
 //import { StrictMode } from 'react';
-import React from 'react';
 import { createRoot } from 'react-dom/client'
-import { FluentProvider, webLightTheme } from '@fluentui/react-components';
+import { FluentProvider } from '@fluentui/react-components';
 import { createDarkTheme, createLightTheme } from '@fluentui/react-components';
 import type { BrandVariants, Theme } from '@fluentui/react-components';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -49,11 +48,3 @@ root.render(
     </QueryClientProvider>
   </FluentProvider>,
 );
-/* The old version
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <FluentProvider theme={webLightTheme}>
-      <App />
-    </FluentProvider>
-  </StrictMode>,
-)*/

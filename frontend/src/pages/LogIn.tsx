@@ -1,5 +1,5 @@
 import { useState } from "react";
-import LogInCard from "../components/LogInCard";
+//import LogInCard from "../components/LogInCard";
 import LogInFluent from "../components/LogInFluent";
 import api from '../utils/axios.config';
 import { useNavigate } from "react-router-dom";

@@ -14,7 +14,7 @@ const CrudBook = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [editingBook, setEditingBook] = useState<Partial<Book>>({});
   
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
   queryKey: ["books"],
   queryFn: () => fetchBooks(),
   });

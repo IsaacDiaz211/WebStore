@@ -1,6 +1,6 @@
 // src/components/Footer/Footer.tsx
 
-import { makeStyles, shorthands, tokens } from "@fluentui/react-components";
+import { makeStyles, tokens } from "@fluentui/react-components";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({

@@ -1,27 +1,25 @@
-import { useState, useMemo } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { 
-  getPayMethods, 
+import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {  
   createPayMethod, 
-  updatePayMethod, 
-  deletePayMethod 
+  updatePayMethod 
 } from "../../services/payMethodService";
-import CrudLayout from "../../components/CRUD/CrudLayout";
+//import CrudLayout from "../../components/CRUD/CrudLayout";
 import CrudModal from "../../components/CRUD/CrudModal";
-import PayMethodTable from "../../components/CRUD/PayMethodTable";
+//import PayMethodTable from "../../components/CRUD/PayMethodTable";
 import PayMethodForm from "../../components/CRUD/PayMethodForm";
-import { PayMethod } from "../../types/PayMethod";
+import { PayMethod } from "../../types/payMethod";
 
 const CrudPayMethod = () => {
   const queryClient = useQueryClient();
-  const [search, setSearch] = useState("");
+  //const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [editingPayMethod, setEditingPayMethod] = useState<Partial<PayMethod>>({});
   
-  const { data: payMethods = [], isLoading } = useQuery({
+  /*const { data: payMethods = [] } = useQuery({
     queryKey: ["payMethods"],
     queryFn: getPayMethods,
-  });
+  });*/
 
   const createMutation = useMutation({
     mutationFn: createPayMethod,
@@ -40,20 +38,20 @@ const CrudPayMethod = () => {
     },
   });
 
-  const deleteMutation = useMutation({
+  /*const deleteMutation = useMutation({
     mutationFn: deletePayMethod,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["payMethods"] });
     },
-  });
+  });*/
 
-  const filteredPayMethods = useMemo(() => {
+  /*const filteredPayMethods = useMemo(() => {
     return payMethods.filter(pm =>
       `${pm.name}`.toLowerCase().includes(search.toLowerCase())
     );
-  }, [payMethods, search]);
+  }, [payMethods, search]);*/
 
-  const handleEdit = (payMethod: PayMethod) => {
+  /*const handleEdit = (payMethod: PayMethod) => {
     setEditingPayMethod(payMethod);
     setModalOpen(true);
   };
@@ -62,7 +60,7 @@ const CrudPayMethod = () => {
     if (confirm("¿Estás seguro que deseas eliminar este medio de pago?")) {
       deleteMutation.mutate(id);
     }
-  };
+  };*/
 
   const handleSubmit = () => {
     if (editingPayMethod._id) {
@@ -75,7 +73,7 @@ const CrudPayMethod = () => {
 
   return (
     <>
-      <CrudLayout
+      {/*<CrudLayout
         title="Gestión de Medios de Pago"
         searchTerm={search}
         onSearch={setSearch}
@@ -89,7 +87,7 @@ const CrudPayMethod = () => {
           onEdit={handleEdit} 
           onDelete={handleDelete} 
         />
-      </CrudLayout>
+      </CrudLayout>*/}
 
       <CrudModal
         open={modalOpen}

@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Input,
   Field,
@@ -6,7 +5,7 @@ import {
   Option,
   Switch,
 } from '@fluentui/react-components';
-import { PayMethod } from '../../types/PayMethod';
+import { PayMethod } from '../../types/payMethod';
 
 interface FormProps {
   payMethod: Partial<PayMethod>;

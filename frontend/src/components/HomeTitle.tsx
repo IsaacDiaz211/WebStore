@@ -1,6 +1,6 @@
 // src/components/AnimatedTitle/AnimatedTitle.tsx
 import { useEffect, useState } from "react";
-import { makeStyles, shorthands } from "@fluentui/react-components";
+import { makeStyles } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
   wrapper: {

@@ -1,5 +1,5 @@
 import api from '../utils/axios.config';
-import { Book, PaginatedBooksResponse } from "../types/book";
+import { PaginatedBooksResponse } from "../types/book";
 
 // se usa  FETCH cuando el método hace peticiones HTTP
 export const fetchBooks = async (): Promise<PaginatedBooksResponse> => {

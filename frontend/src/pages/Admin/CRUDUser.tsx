@@ -13,7 +13,7 @@ const CrudUser = () => {
   const [modalOpen, setModalOpen] = useState(false);
   //const [editingUser, setEditingUser] = useState<User | null>(null);
   const [editingUser, setEditingUser] = useState<Partial<User>>({});
-  const { data: users = [], isLoading } = useQuery({
+  const { data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: getUsers,
   });

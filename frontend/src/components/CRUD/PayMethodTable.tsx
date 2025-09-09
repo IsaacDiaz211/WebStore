@@ -12,7 +12,7 @@ import {
   CardFooter,
   Badge,
 } from "@fluentui/react-components";
-import { PayMethod } from "../../types/PayMethod";
+import { PayMethod } from "../../types/payMethod";
 
 interface TableProps {
   payMethods: PayMethod[];

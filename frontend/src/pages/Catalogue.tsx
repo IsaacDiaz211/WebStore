@@ -1,5 +1,5 @@
 import ProductCard  from "../components/ProductCard";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { fetchActiveBooks } from "../services/bookService";
 import { makeStyles } from "@fluentui/react-components";
 //import  FilterCard  from "../components/FilterCard";
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 
 export const Catalogue = () => {
   const styles = useStyles();
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
   queryKey: ["books"],
   queryFn: () => fetchActiveBooks(),
   });
